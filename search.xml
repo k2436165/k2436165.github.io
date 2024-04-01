@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>Hexo 博客搭建</title>
+    <url>/pages/a92a55614521</url>
+    <content><![CDATA[<h1 id="环境需求"><a href="#环境需求" class="headerlink" title="环境需求"></a>环境需求</h1><p>git<br>nodejs<br>去官网下一个就好</p>
+<h1 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h1><h2 id="安装-Hexo"><a href="#安装-Hexo" class="headerlink" title="安装 Hexo"></a>安装 Hexo</h2><div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="初始化-Hexo"><a href="#初始化-Hexo" class="headerlink" title="初始化 Hexo"></a>初始化 Hexo</h2><p>可以指定一个博客的文件夹</p>
+<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">hexo init &lt;folder&gt;</span><br><span class="line">cd &lt;folder&gt;</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure></div>
+
+<p>不指定文件夹就会将当前目录作为博客文件夹</p>
+<h1 id="和-github-pages-联动"><a href="#和-github-pages-联动" class="headerlink" title="和 github pages 联动"></a>和 github pages 联动</h1><h2 id="安装-hexo-deployer-git"><a href="#安装-hexo-deployer-git" class="headerlink" title="安装 hexo-deployer-git"></a>安装 hexo-deployer-git</h2><div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="在-config-yml-中添加以下配置"><a href="#在-config-yml-中添加以下配置" class="headerlink" title="在  _config.yml  中添加以下配置"></a>在  <code>_config.yml</code>  中添加以下配置</h2><div class="highlight-container" data-rel="Yaml"><figure class="iseeu highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">https://github.com/k2436165/k2436165.github.io.git</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">main</span></span><br></pre></td></tr></table></figure></div>
+
+<p>之后就可以 <code>hexo deploy</code> 推送到远程仓库了</p>
+<h1 id="主题安装"><a href="#主题安装" class="headerlink" title="主题安装"></a>主题安装</h1><p>博客使用 Redefine 主题</p>
+<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">npm install hexo-theme-redefine@latest</span><br></pre></td></tr></table></figure></div>
+
+<p>然后在 <code>_config. yml </code> 启用主题</p>
+<div class="highlight-container" data-rel="Yaml"><figure class="iseeu highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">theme:</span> <span class="string">redefine</span></span><br></pre></td></tr></table></figure></div>
+
+<p>再顺手把自带主题删了</p>
+<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">rm _config.landscape.yml</span><br><span class="line">npm remove hexo-theme-landscape</span><br></pre></td></tr></table></figure></div>
+
+<h1 id="主题配置"><a href="#主题配置" class="headerlink" title="主题配置"></a>主题配置</h1><h2 id="基本配置"><a href="#基本配置" class="headerlink" title="基本配置"></a>基本配置</h2><p>从主题文件夹里复制一份默认的配置文件出来</p>
+<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">cp node_modules/hexo-theme-redefine/_config.yml _config.redefine.yml</span><br></pre></td></tr></table></figure></div>
+
+<p>对一些基本信息什么的简单修改就好，官方手册写的很详细</p>
+<h2 id="字数统计"><a href="#字数统计" class="headerlink" title="字数统计"></a>字数统计</h2><div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">npm install hexo-wordcount</span><br></pre></td></tr></table></figure></div>
+
+<p>然后配置文件里启用</p>
+<h1 id="页面配置"><a href="#页面配置" class="headerlink" title="页面配置"></a>页面配置</h1><h2 id="链接格式"><a href="#链接格式" class="headerlink" title="链接格式"></a>链接格式</h2><p>在 <code>_config.yml</code> 中修改 permalink</p>
+<div class="highlight-container" data-rel="Yaml"><figure class="iseeu highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">permalink:</span> <span class="string">pages/:hash</span></span><br></pre></td></tr></table></figure></div>
+
+<h2 id="404-页面"><a href="#404-页面" class="headerlink" title="404 页面"></a>404 页面</h2><div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">hexo new page 404</span><br></pre></td></tr></table></figure></div>
+
+<h1 id="搜索功能"><a href="#搜索功能" class="headerlink" title="搜索功能"></a>搜索功能</h1><p>安装插件 hexo-generator-searchdb</p>
+<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">npm install hexo-generator-searchdb --save</span><br></pre></td></tr></table></figure></div>
+
+<p>然后配置文件里启用</p>
+<h1 id="Gitalk-配置"><a href="#Gitalk-配置" class="headerlink" title="Gitalk 配置"></a>Gitalk 配置</h1><p>新建一个 Github OAuth Apps，其中 Homepage URL 和 Authorization callback URL 全写博客域名就行<br>再写一下配置</p>
+<div class="highlight-container" data-rel="Yaml"><figure class="iseeu highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">comment:</span></span><br><span class="line">  <span class="attr">config:</span></span><br><span class="line">    <span class="attr">gitalk:</span></span><br><span class="line">      <span class="attr">clientID:</span> <span class="string">你的</span> <span class="string">Client</span> <span class="string">ID</span></span><br><span class="line">      <span class="attr">clientSecret:</span> <span class="string">你的</span> <span class="string">Client</span> <span class="string">Secret</span></span><br><span class="line">      <span class="attr">repo:</span> <span class="string">你的仓库名</span></span><br><span class="line">      <span class="attr">owner:</span> <span class="string">你的</span> <span class="string">GitHub</span> <span class="string">用户名</span></span><br></pre></td></tr></table></figure></div>
+
+<h1 id="生成-Sitemap"><a href="#生成-Sitemap" class="headerlink" title="生成 Sitemap"></a>生成 Sitemap</h1><p>安装两个插件，生成谷歌和百度两种版本</p>
+<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">npm install hexo-generator-sitemap --save</span><br><span class="line">npm install hexo-generator-baidu-sitemap --save</span><br></pre></td></tr></table></figure></div>
+
+<p>在 <code>_config.yml</code> 中找到 url，改成自己的域名，再重新构建 hexo 即可</p>
+]]></content>
+      <categories>
+        <category>环境搭建</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+      </tags>
+  </entry>
+</search>
