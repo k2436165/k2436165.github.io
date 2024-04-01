@@ -71,31 +71,10 @@
     <priority>0.2</priority>
   </url>
   
-  <url>
-    <loc>https://k2436165.github.io/tags/test/</loc>
-    <lastmod>2024-04-01</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
 
   
   <url>
     <loc>https://k2436165.github.io/categories/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</loc>
-    <lastmod>2024-04-01</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://k2436165.github.io/categories/te/</loc>
-    <lastmod>2024-04-01</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://k2436165.github.io/categories/test/</loc>
     <lastmod>2024-04-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>

@@ -6,7 +6,4 @@ https://k2436165.github.io/tags/index.html
 https://k2436165.github.io/404/index.html
 https://k2436165.github.io/
 https://k2436165.github.io/tags/Hexo/
-https://k2436165.github.io/tags/test/
 https://k2436165.github.io/categories/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/
-https://k2436165.github.io/categories/te/
-https://k2436165.github.io/categories/test/
