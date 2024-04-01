@@ -2,7 +2,7 @@
 <search>
   <entry>
     <title>Hexo 博客搭建</title>
-    <url>/pages/a92a55614521</url>
+    <url>/pages/a92a55614521/</url>
     <content><![CDATA[<h1 id="环境需求"><a href="#环境需求" class="headerlink" title="环境需求"></a>环境需求</h1><p>git<br>nodejs<br>去官网下一个就好</p>
 <h1 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h1><h2 id="安装-Hexo"><a href="#安装-Hexo" class="headerlink" title="安装 Hexo"></a>安装 Hexo</h2><div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure></div>
 
@@ -32,8 +32,9 @@
 
 <p>然后配置文件里启用</p>
 <h1 id="页面配置"><a href="#页面配置" class="headerlink" title="页面配置"></a>页面配置</h1><h2 id="链接格式"><a href="#链接格式" class="headerlink" title="链接格式"></a>链接格式</h2><p>在 <code>_config.yml</code> 中修改 permalink</p>
-<div class="highlight-container" data-rel="Yaml"><figure class="iseeu highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">permalink:</span> <span class="string">pages/:hash</span></span><br></pre></td></tr></table></figure></div>
+<div class="highlight-container" data-rel="Yaml"><figure class="iseeu highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">permalink:</span> <span class="string">pages/:hash/</span></span><br></pre></td></tr></table></figure></div>
 
+<p>最后的 <code>/</code> 一定要有，不然页面没法跳转</p>
 <h2 id="404-页面"><a href="#404-页面" class="headerlink" title="404 页面"></a>404 页面</h2><div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">hexo new page 404</span><br></pre></td></tr></table></figure></div>
 
 <h1 id="搜索功能"><a href="#搜索功能" class="headerlink" title="搜索功能"></a>搜索功能</h1><p>安装插件 hexo-generator-searchdb</p>
